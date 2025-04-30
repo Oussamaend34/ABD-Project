@@ -1,0 +1,31 @@
+volume_per_hour: 10000
+
+error_ratio:
+  missing_fields: 0.02
+  corrupted_data: 0.015
+  duplicates: 0.01
+  out_of_order_timestamps: 0.005
+
+service_distribution:
+  voice: 0.6
+  data: 0.3
+  sms: 0.1
+
+technologies:
+  - 2G
+  - 3G
+  - 4G
+  - 5G
+
+
+
+output:
+  mode: "file"  # options: file, kafka
+  file_format: "json"
+  output_dir: "./output"
+  kafka_topic: "cdr_events"
+  kafka_bootstrap_servers: "localhost:9092"
+
+time_distribution:
+  peak_hours: [8, 20]  # 8AM - 8PM
+  off_peak_multiplier: 0.5  # activity multiplier during off-peak

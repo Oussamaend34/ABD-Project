@@ -1,0 +1,6 @@
+/examples
+/test
+.DS_Store
+/docker
+**/.venv
+**/test.py
