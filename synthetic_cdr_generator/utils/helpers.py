@@ -4,22 +4,14 @@ This module contains helper functions for the synthetic CDR generator.
 
 from typing import List, Optional, Dict
 import random
-from dataclasses import dataclass
 import json
 
+import numpy as np
 
-@dataclass
-class CallerProfile:
-    """
-    Represents a caller profile with a unique MSISDN and location information.
-    """
-
-    msisdn: str
-    home_city: str
-    home_region: str
+from .schemas import CallerProfile
 
 
-def generate_msisdn() -> str:
+def _generate_msisdn() -> str:
     """
     Generate a random MSISDN (Mobile Station International Subscriber Directory Number).
     The MSISDN is a unique number used to identify a mobile phone number.
@@ -75,7 +67,7 @@ def init_pool(
         home_city = cities[home_city_key]["name"]
         home_region = cities[home_city_key]["region_name"]
         caller_profile = CallerProfile(
-            msisdn=generate_msisdn(),
+            msisdn=_generate_msisdn(),
             home_city=home_city,
             home_region=home_region,
         )
@@ -143,6 +135,52 @@ def pick_location(
             home_city=other_city,
             home_region=cities[other_city_key]["region_name"],
         )
+
+
+def pick_cell_id(
+    caller: CallerProfile,
+    cities: Dict[str, Dict[str, str]] = load_geography(),
+) -> str:
+    """
+    Pick a random cell ID from the pool.
+
+    Args:
+        pool (List[CallerProfile]): The pool of MSISDNs to choose from.
+        caller (CallerProfile): The MSISDN to pick the location for.
+
+    Returns:
+        str: A random cell ID from the pool.
+    """
+    number = random.randint(1, 100)
+    for _, city in cities.items():
+        if city["name"] == caller.home_city:
+            number = random.randint(1, int(city["max_cell_id"]))
+            return f"{city['pretty_name']}_{number}"
+    return f"{caller.home_city}_{number}"
+
+
+def get_duration_corresponding_to_technology(
+    technology: str
+) -> int:
+    """
+    Get the duration corresponding to the technology.
+
+    Args:
+        technology (str): The technology to get the duration for.
+
+    Returns:
+        int: The duration corresponding to the technology.
+    """
+    tech_scaling = {
+        "2G": 60,  
+        "3G": 90,
+        "4G": 150,
+        "5G": 180,  
+    }
+    scale = tech_scaling.get(technology, 90)
+
+    duration = np.random.lognormal(mean=10, sigma=2) * scale
+    return int(min(duration, 7200))
 
 
 if __name__ == "__main__":

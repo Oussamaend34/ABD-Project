@@ -1,1574 +1,2360 @@
 {
     "0": {
         "name": "Afourar",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "afourar",
+        "max_cell_id": "93"
     },
     "1": {
         "name": "Agadir",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "agadir",
+        "max_cell_id": "89"
     },
     "2": {
         "name": "Agdz",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "agdz",
+        "max_cell_id": "17"
     },
     "3": {
         "name": "Aghbala",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "aghbala",
+        "max_cell_id": "16"
     },
     "4": {
         "name": "Agni Izimmer",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "agni_izimmer",
+        "max_cell_id": "33"
     },
     "5": {
         "name": "Agourai",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "agourai",
+        "max_cell_id": "49"
     },
     "6": {
         "name": "Ahfir",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ahfir",
+        "max_cell_id": "51"
     },
     "7": {
         "name": "Ain El Aouda",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "ain_el_aouda",
+        "max_cell_id": "22"
     },
     "8": {
         "name": "Ain Taoujdate",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ain_taoujdate",
+        "max_cell_id": "10"
     },
     "9": {
         "name": "Ait Daoud",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ait_daoud",
+        "max_cell_id": "15"
     },
     "10": {
         "name": "Ajdir",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "ajdir",
+        "max_cell_id": "67"
     },
     "11": {
         "name": "Akchour",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "akchour",
+        "max_cell_id": "56"
     },
     "12": {
         "name": "Akka",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "akka",
+        "max_cell_id": "97"
     },
     "13": {
         "name": "Aklim",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "aklim",
+        "max_cell_id": "19"
     },
     "14": {
         "name": "Aknoul",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "aknoul",
+        "max_cell_id": "95"
     },
     "15": {
         "name": "Al Aroui",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "al_aroui",
+        "max_cell_id": "62"
     },
     "16": {
         "name": "Al Hoce\u00efma",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "al_hoceima",
+        "max_cell_id": "27"
     },
     "17": {
         "name": "Alnif",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "alnif",
+        "max_cell_id": "33"
     },
     "18": {
         "name": "Amalou Ighriben",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "amalou_ighriben",
+        "max_cell_id": "12"
     },
     "19": {
         "name": "Amizmiz",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "amizmiz",
+        "max_cell_id": "65"
     },
     "20": {
         "name": "Anzi",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "anzi",
+        "max_cell_id": "88"
     },
     "21": {
         "name": "Aoufous",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "aoufous",
+        "max_cell_id": "38"
     },
     "22": {
         "name": "Aoulouz",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "aoulouz",
+        "max_cell_id": "70"
     },
     "23": {
         "name": "Aourir",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "aourir",
+        "max_cell_id": "53"
     },
     "24": {
         "name": "Arazane",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "arazane",
+        "max_cell_id": "17"
     },
     "25": {
         "name": "Arbaoua",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "arbaoua",
+        "max_cell_id": "74"
     },
     "26": {
         "name": "Arfoud",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "arfoud",
+        "max_cell_id": "72"
     },
     "27": {
         "name": "Assa",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "assa",
+        "max_cell_id": "93"
     },
     "28": {
         "name": "Assahrij",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "assahrij",
+        "max_cell_id": "35"
     },
     "29": {
         "name": "Assilah",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "assilah",
+        "max_cell_id": "72"
     },
     "30": {
         "name": "Awsard",
-        "region_id": "12"
+        "region_id": "12",
+        "pretty_name": "awsard",
+        "max_cell_id": "48"
     },
     "31": {
         "name": "Azemmour",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "azemmour",
+        "max_cell_id": "55"
     },
     "32": {
         "name": "Azilal",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "azilal",
+        "max_cell_id": "13"
     },
     "33": {
         "name": "Azrou",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "azrou",
+        "max_cell_id": "34"
     },
     "34": {
         "name": "A\u00efn Bni Mathar",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ain_bni_mathar",
+        "max_cell_id": "51"
     },
     "35": {
         "name": "A\u00efn Cheggag",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ain_cheggag",
+        "max_cell_id": "43"
     },
     "36": {
         "name": "A\u00efn Dorij",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "ain_dorij",
+        "max_cell_id": "98"
     },
     "37": {
         "name": "A\u00efn Erreggada",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ain_erreggada",
+        "max_cell_id": "20"
     },
     "38": {
         "name": "A\u00efn Harrouda",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "ain_harrouda",
+        "max_cell_id": "41"
     },
     "39": {
         "name": "A\u00efn Jemaa",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ain_jemaa",
+        "max_cell_id": "78"
     },
     "40": {
         "name": "A\u00efn Karma",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ain_karma",
+        "max_cell_id": "84"
     },
     "41": {
         "name": "A\u00efn Leuh",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ain_leuh",
+        "max_cell_id": "61"
     },
     "42": {
         "name": "A\u00eft Attab",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "ait_attab",
+        "max_cell_id": "29"
     },
     "43": {
         "name": "A\u00eft Baha",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "ait_baha",
+        "max_cell_id": "29"
     },
     "44": {
         "name": "A\u00eft Boubidmane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ait_boubidmane",
+        "max_cell_id": "99"
     },
     "45": {
         "name": "A\u00eft Hichem",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "ait_hichem",
+        "max_cell_id": "100"
     },
     "46": {
         "name": "A\u00eft Ia\u00e2za",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "ait_iaaza",
+        "max_cell_id": "41"
     },
     "47": {
         "name": "A\u00eft Ishaq",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "ait_ishaq",
+        "max_cell_id": "86"
     },
     "48": {
         "name": "A\u00eft Majden",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "ait_majden",
+        "max_cell_id": "95"
     },
     "49": {
         "name": "A\u00eft Melloul",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "ait_melloul",
+        "max_cell_id": "54"
     },
     "50": {
         "name": "A\u00eft Ourir",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ait_ourir",
+        "max_cell_id": "75"
     },
     "51": {
         "name": "A\u00eft Yalla",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "ait_yalla",
+        "max_cell_id": "60"
     },
     "52": {
         "name": "Bab Berred",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "bab_berred",
+        "max_cell_id": "77"
     },
     "53": {
         "name": "Bab Taza",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "bab_taza",
+        "max_cell_id": "12"
     },
     "54": {
         "name": "Beja\u00e2d",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "bejaad",
+        "max_cell_id": "55"
     },
     "55": {
         "name": "Ben Ahmed",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "ben_ahmed",
+        "max_cell_id": "33"
     },
     "56": {
         "name": "Ben Guerir",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ben_guerir",
+        "max_cell_id": "52"
     },
     "57": {
         "name": "Ben Sergao",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "ben_sergao",
+        "max_cell_id": "54"
     },
     "58": {
         "name": "Ben Ta\u00efeb",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ben_taieb",
+        "max_cell_id": "15"
     },
     "59": {
         "name": "Ben Yakhlef",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "ben_yakhlef",
+        "max_cell_id": "64"
     },
     "60": {
         "name": "Beni Ayat",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "beni_ayat",
+        "max_cell_id": "55"
     },
     "61": {
         "name": "Benslimane",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "benslimane",
+        "max_cell_id": "64"
     },
     "62": {
         "name": "Berkane",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "berkane",
+        "max_cell_id": "41"
     },
     "63": {
         "name": "Berrechid",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "berrechid",
+        "max_cell_id": "87"
     },
     "64": {
         "name": "Bhalil",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "bhalil",
+        "max_cell_id": "52"
     },
     "65": {
         "name": "Bin elouidane",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "bin_elouidane",
+        "max_cell_id": "63"
     },
     "66": {
         "name": "Biougra",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "biougra",
+        "max_cell_id": "24"
     },
     "67": {
         "name": "Bir Jdid",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "bir_jdid",
+        "max_cell_id": "52"
     },
     "68": {
         "name": "Bni Ansar",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bni_ansar",
+        "max_cell_id": "15"
     },
     "69": {
         "name": "Bni Bouayach",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "bni_bouayach",
+        "max_cell_id": "62"
     },
     "70": {
         "name": "Bni Chiker",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bni_chiker",
+        "max_cell_id": "22"
     },
     "71": {
         "name": "Bni Drar",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bni_drar",
+        "max_cell_id": "70"
     },
     "72": {
         "name": "Bni Hadifa",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "bni_hadifa",
+        "max_cell_id": "39"
     },
     "73": {
         "name": "Bni Tadjite",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bni_tadjite",
+        "max_cell_id": "19"
     },
     "74": {
         "name": "Bouanane",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bouanane",
+        "max_cell_id": "28"
     },
     "75": {
         "name": "Bouarfa",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bouarfa",
+        "max_cell_id": "28"
     },
     "76": {
         "name": "Boudnib",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "boudnib",
+        "max_cell_id": "48"
     },
     "77": {
         "name": "Boufakrane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "boufakrane",
+        "max_cell_id": "48"
     },
     "78": {
         "name": "Bouguedra",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "bouguedra",
+        "max_cell_id": "50"
     },
     "79": {
         "name": "Bouhdila",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "bouhdila",
+        "max_cell_id": "76"
     },
     "80": {
         "name": "Bouizakarne",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "bouizakarne",
+        "max_cell_id": "72"
     },
     "81": {
         "name": "Boujdour",
-        "region_id": "11"
+        "region_id": "11",
+        "pretty_name": "boujdour",
+        "max_cell_id": "69"
     },
     "82": {
         "name": "Boujniba",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "boujniba",
+        "max_cell_id": "49"
     },
     "83": {
         "name": "Boulanouare",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "boulanouare",
+        "max_cell_id": "36"
     },
     "84": {
         "name": "Boulemane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "boulemane",
+        "max_cell_id": "81"
     },
     "85": {
         "name": "Boumalne-Dad\u00e8s",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "boumalne_dades",
+        "max_cell_id": "11"
     },
     "86": {
         "name": "Boumia",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "boumia",
+        "max_cell_id": "68"
     },
     "87": {
         "name": "Bouskoura",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "bouskoura",
+        "max_cell_id": "86"
     },
     "88": {
         "name": "Bouznika",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "bouznika",
+        "max_cell_id": "78"
     },
     "89": {
         "name": "Bradia",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "bradia",
+        "max_cell_id": "80"
     },
     "90": {
         "name": "Brikcha",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "brikcha",
+        "max_cell_id": "31"
     },
     "91": {
         "name": "Bzou",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "bzou",
+        "max_cell_id": "97"
     },
     "92": {
         "name": "B\u00e9ni Mellal",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "beni_mellal",
+        "max_cell_id": "86"
     },
     "93": {
         "name": "Casablanca",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "casablanca",
+        "max_cell_id": "50"
     },
     "94": {
         "name": "Chefchaouen",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "chefchaouen",
+        "max_cell_id": "57"
     },
     "95": {
         "name": "Chichaoua",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "chichaoua",
+        "max_cell_id": "100"
     },
     "96": {
         "name": "Dar Bni Karrich",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "dar_bni_karrich",
+        "max_cell_id": "100"
     },
     "97": {
         "name": "Dar Chaoui",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "dar_chaoui",
+        "max_cell_id": "76"
     },
     "98": {
         "name": "Dar El Kebdani",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "dar_el_kebdani",
+        "max_cell_id": "82"
     },
     "99": {
         "name": "Dar Gueddari",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "dar_gueddari",
+        "max_cell_id": "75"
     },
     "100": {
         "name": "Dar Oulad Zidouh",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "dar_oulad_zidouh",
+        "max_cell_id": "37"
     },
     "101": {
         "name": "Dcheira El Jihadia",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "dcheira_el_jihadia",
+        "max_cell_id": "72"
     },
     "102": {
         "name": "Debdou",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "debdou",
+        "max_cell_id": "75"
     },
     "103": {
         "name": "Demnate",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "demnate",
+        "max_cell_id": "51"
     },
     "104": {
         "name": "Deroua",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "deroua",
+        "max_cell_id": "40"
     },
     "105": {
         "name": "Douar Kannine",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "douar_kannine",
+        "max_cell_id": "14"
     },
     "106": {
         "name": "Dra'a",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "dra_a",
+        "max_cell_id": "68"
     },
     "107": {
         "name": "Drargua",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "drargua",
+        "max_cell_id": "16"
     },
     "108": {
         "name": "Driouch",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "driouch",
+        "max_cell_id": "50"
     },
     "109": {
         "name": "Echemmaia",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "echemmaia",
+        "max_cell_id": "76"
     },
     "110": {
         "name": "El A\u00efoun Sidi Mellouk",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "el_aioun_sidi_mellouk",
+        "max_cell_id": "68"
     },
     "111": {
         "name": "El Borouj",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "el_borouj",
+        "max_cell_id": "92"
     },
     "112": {
         "name": "El Gara",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "el_gara",
+        "max_cell_id": "37"
     },
     "113": {
         "name": "El Guerdane",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "el_guerdane",
+        "max_cell_id": "44"
     },
     "114": {
         "name": "El Hajeb",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "el_hajeb",
+        "max_cell_id": "47"
     },
     "115": {
         "name": "El Hanchane",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "el_hanchane",
+        "max_cell_id": "60"
     },
     "116": {
         "name": "El Jadida",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "el_jadida",
+        "max_cell_id": "35"
     },
     "117": {
         "name": "El Kela\u00e2 des Sraghna",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "el_kelaa_des_sraghna",
+        "max_cell_id": "16"
     },
     "118": {
         "name": "El Ksiba",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "el_ksiba",
+        "max_cell_id": "53"
     },
     "119": {
         "name": "El Marsa",
-        "region_id": "11"
+        "region_id": "11",
+        "pretty_name": "el_marsa",
+        "max_cell_id": "44"
     },
     "120": {
         "name": "El Menzel",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "el_menzel",
+        "max_cell_id": "47"
     },
     "121": {
         "name": "El Ouatia",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "el_ouatia",
+        "max_cell_id": "77"
     },
     "122": {
         "name": "Elkbab",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "elkbab",
+        "max_cell_id": "71"
     },
     "123": {
         "name": "Er-Rich",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "er_rich",
+        "max_cell_id": "31"
     },
     "124": {
         "name": "Errachidia",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "errachidia",
+        "max_cell_id": "72"
     },
     "125": {
         "name": "Es-Semara",
-        "region_id": "11"
+        "region_id": "11",
+        "pretty_name": "es_semara",
+        "max_cell_id": "36"
     },
     "126": {
         "name": "Essaouira",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "essaouira",
+        "max_cell_id": "84"
     },
     "127": {
         "name": "Fam El Hisn",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "fam_el_hisn",
+        "max_cell_id": "29"
     },
     "128": {
         "name": "Farkhana",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "farkhana",
+        "max_cell_id": "28"
     },
     "129": {
         "name": "Figuig",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "figuig",
+        "max_cell_id": "95"
     },
     "130": {
         "name": "Fnideq",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "fnideq",
+        "max_cell_id": "95"
     },
     "131": {
         "name": "Foum Jamaa",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "foum_jamaa",
+        "max_cell_id": "87"
     },
     "132": {
         "name": "Foum Zguid",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "foum_zguid",
+        "max_cell_id": "74"
     },
     "133": {
         "name": "Fquih Ben Salah",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "fquih_ben_salah",
+        "max_cell_id": "72"
     },
     "134": {
         "name": "Fra\u00efta",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "fraita",
+        "max_cell_id": "86"
     },
     "135": {
         "name": "F\u00e8s",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "fes",
+        "max_cell_id": "96"
     },
     "136": {
         "name": "Gardmit",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "gardmit",
+        "max_cell_id": "12"
     },
     "137": {
         "name": "Ghafsai",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ghafsai",
+        "max_cell_id": "88"
     },
     "138": {
         "name": "Ghmate",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ghmate",
+        "max_cell_id": "30"
     },
     "139": {
         "name": "Goulmima",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "goulmima",
+        "max_cell_id": "26"
     },
     "140": {
         "name": "Gourrama",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "gourrama",
+        "max_cell_id": "12"
     },
     "141": {
         "name": "Guelmim",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "guelmim",
+        "max_cell_id": "53"
     },
     "142": {
         "name": "Guercif",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "guercif",
+        "max_cell_id": "22"
     },
     "143": {
         "name": "Gueznaia",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "gueznaia",
+        "max_cell_id": "39"
     },
     "144": {
         "name": "Guigou",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "guigou",
+        "max_cell_id": "86"
     },
     "145": {
         "name": "Guisser",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "guisser",
+        "max_cell_id": "40"
     },
     "146": {
         "name": "Had Bouhssoussen",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "had_bouhssoussen",
+        "max_cell_id": "59"
     },
     "147": {
         "name": "Had Kourt",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "had_kourt",
+        "max_cell_id": "27"
     },
     "148": {
         "name": "Haj Kaddour",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "haj_kaddour",
+        "max_cell_id": "66"
     },
     "149": {
         "name": "Harhoura",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "harhoura",
+        "max_cell_id": "60"
     },
     "150": {
         "name": "Harte Lyamine",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "harte_lyamine",
+        "max_cell_id": "72"
     },
     "151": {
         "name": "Hattane",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "hattane",
+        "max_cell_id": "52"
     },
     "152": {
         "name": "Hrara",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "hrara",
+        "max_cell_id": "97"
     },
     "153": {
         "name": "Ida Ougnidif",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "ida_ougnidif",
+        "max_cell_id": "75"
     },
     "154": {
         "name": "Ifrane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ifrane",
+        "max_cell_id": "89"
     },
     "155": {
         "name": "Ifri",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "ifri",
+        "max_cell_id": "84"
     },
     "156": {
         "name": "Igdamen",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "igdamen",
+        "max_cell_id": "98"
     },
     "157": {
         "name": "Ighil n'Oumgoun",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "ighil_n_oumgoun",
+        "max_cell_id": "47"
     },
     "158": {
         "name": "Ighoud",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ighoud",
+        "max_cell_id": "75"
     },
     "159": {
         "name": "Ighounane",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "ighounane",
+        "max_cell_id": "88"
     },
     "160": {
         "name": "Ihddaden",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ihddaden",
+        "max_cell_id": "98"
     },
     "161": {
         "name": "Imassine",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "imassine",
+        "max_cell_id": "29"
     },
     "162": {
         "name": "Imintanoute",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "imintanoute",
+        "max_cell_id": "37"
     },
     "163": {
         "name": "Imouzzer Kandar",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "imouzzer_kandar",
+        "max_cell_id": "42"
     },
     "164": {
         "name": "Imouzzer Marmoucha",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "imouzzer_marmoucha",
+        "max_cell_id": "23"
     },
     "165": {
         "name": "Imzouren",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "imzouren",
+        "max_cell_id": "43"
     },
     "166": {
         "name": "Inahnahen",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "inahnahen",
+        "max_cell_id": "12"
     },
     "167": {
         "name": "Inezgane",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "inezgane",
+        "max_cell_id": "59"
     },
     "168": {
         "name": "Irherm",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "irherm",
+        "max_cell_id": "90"
     },
     "169": {
         "name": "Issaguen (Ketama)",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "issaguen_ketama_",
+        "max_cell_id": "11"
     },
     "170": {
         "name": "Itzer",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "itzer",
+        "max_cell_id": "59"
     },
     "171": {
         "name": "Jam\u00e2at Shaim",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "jamaat_shaim",
+        "max_cell_id": "91"
     },
     "172": {
         "name": "Ja\u00e2dar",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "jaadar",
+        "max_cell_id": "95"
     },
     "173": {
         "name": "Jebha",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "jebha",
+        "max_cell_id": "67"
     },
     "174": {
         "name": "Jerada",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "jerada",
+        "max_cell_id": "34"
     },
     "175": {
         "name": "Jorf",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "jorf",
+        "max_cell_id": "39"
     },
     "176": {
         "name": "Jorf El Melha",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "jorf_el_melha",
+        "max_cell_id": "80"
     },
     "177": {
         "name": "Jorf Lasfar",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "jorf_lasfar",
+        "max_cell_id": "41"
     },
     "178": {
         "name": "Karia",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "karia",
+        "max_cell_id": "14"
     },
     "179": {
         "name": "Karia (El Jadida)",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "karia_el_jadida_",
+        "max_cell_id": "66"
     },
     "180": {
         "name": "Karia Ba Mohamed",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "karia_ba_mohamed",
+        "max_cell_id": "12"
     },
     "181": {
         "name": "Kariat Arekmane",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "kariat_arekmane",
+        "max_cell_id": "40"
     },
     "182": {
         "name": "Kasba Tadla",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "kasba_tadla",
+        "max_cell_id": "42"
     },
     "183": {
         "name": "Kassita",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "kassita",
+        "max_cell_id": "66"
     },
     "184": {
         "name": "Kattara",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "kattara",
+        "max_cell_id": "73"
     },
     "185": {
         "name": "Kehf Nsour",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "kehf_nsour",
+        "max_cell_id": "92"
     },
     "186": {
         "name": "Kelaat-M'Gouna",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "kelaat_m_gouna",
+        "max_cell_id": "36"
     },
     "187": {
         "name": "Kerouna",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "kerouna",
+        "max_cell_id": "74"
     },
     "188": {
         "name": "Kerrouchen",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "kerrouchen",
+        "max_cell_id": "85"
     },
     "189": {
         "name": "Khemis Zemamra",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "khemis_zemamra",
+        "max_cell_id": "70"
     },
     "190": {
         "name": "Khenichet",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "khenichet",
+        "max_cell_id": "41"
     },
     "191": {
         "name": "Khouribga",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "khouribga",
+        "max_cell_id": "99"
     },
     "192": {
         "name": "Kh\u00e9mis Sahel",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "khemis_sahel",
+        "max_cell_id": "75"
     },
     "193": {
         "name": "Kh\u00e9misset",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "khemisset",
+        "max_cell_id": "96"
     },
     "194": {
         "name": "Kh\u00e9nifra",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "khenifra",
+        "max_cell_id": "55"
     },
     "195": {
         "name": "Ksar El K\u00e9bir",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "ksar_el_kebir",
+        "max_cell_id": "43"
     },
     "196": {
         "name": "K\u00e9nitra",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "kenitra",
+        "max_cell_id": "48"
     },
     "197": {
         "name": "Laaounate",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "laaounate",
+        "max_cell_id": "99"
     },
     "198": {
         "name": "Laayoune",
-        "region_id": "11"
+        "region_id": "11",
+        "pretty_name": "laayoune",
+        "max_cell_id": "92"
     },
     "199": {
         "name": "Lakhsas",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "lakhsas",
+        "max_cell_id": "42"
     },
     "200": {
         "name": "Lakhsass",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "lakhsass",
+        "max_cell_id": "74"
     },
     "201": {
         "name": "Lalla Mimouna",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "lalla_mimouna",
+        "max_cell_id": "34"
     },
     "202": {
         "name": "Lalla Takerkoust",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "lalla_takerkoust",
+        "max_cell_id": "67"
     },
     "203": {
         "name": "Larache",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "larache",
+        "max_cell_id": "80"
     },
     "204": {
         "name": "La\u00e2tamna",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "laatamna",
+        "max_cell_id": "42"
     },
     "205": {
         "name": "Loudaya",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "loudaya",
+        "max_cell_id": "41"
     },
     "206": {
         "name": "Loulad",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "loulad",
+        "max_cell_id": "84"
     },
     "207": {
         "name": "Lqli\u00e2a",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "lqliaa",
+        "max_cell_id": "31"
     },
     "208": {
         "name": "L\u00e2attaouia",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "laattaouia",
+        "max_cell_id": "44"
     },
     "209": {
         "name": "M'diq",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "m_diq",
+        "max_cell_id": "44"
     },
     "210": {
         "name": "M'haya",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "m_haya",
+        "max_cell_id": "59"
     },
     "211": {
         "name": "M'rirt",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "m_rirt",
+        "max_cell_id": "50"
     },
     "212": {
         "name": "M'semrir",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "m_semrir",
+        "max_cell_id": "73"
     },
     "213": {
         "name": "Madagh",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "madagh",
+        "max_cell_id": "12"
     },
     "214": {
         "name": "Marrakech",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "marrakech",
+        "max_cell_id": "26"
     },
     "215": {
         "name": "Martil",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "martil",
+        "max_cell_id": "96"
     },
     "216": {
         "name": "Massa (Maroc)",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "massa_maroc_",
+        "max_cell_id": "34"
     },
     "217": {
         "name": "Mechra Bel Ksiri",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "mechra_bel_ksiri",
+        "max_cell_id": "62"
     },
     "218": {
         "name": "Megousse",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "megousse",
+        "max_cell_id": "55"
     },
     "219": {
         "name": "Mehdia",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "mehdia",
+        "max_cell_id": "63"
     },
     "220": {
         "name": "Mekn\u00e8s",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "meknes",
+        "max_cell_id": "12"
     },
     "221": {
         "name": "Midar",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "midar",
+        "max_cell_id": "12"
     },
     "222": {
         "name": "Midelt",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "midelt",
+        "max_cell_id": "71"
     },
     "223": {
         "name": "Missour",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "missour",
+        "max_cell_id": "10"
     },
     "224": {
         "name": "Mohammadia",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "mohammadia",
+        "max_cell_id": "90"
     },
     "225": {
         "name": "Moqrisset",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "moqrisset",
+        "max_cell_id": "58"
     },
     "226": {
         "name": "Moulay Abdallah",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "moulay_abdallah",
+        "max_cell_id": "28"
     },
     "227": {
         "name": "Moulay Ali Cherif",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "moulay_ali_cherif",
+        "max_cell_id": "46"
     },
     "228": {
         "name": "Moulay Bouazza",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "moulay_bouazza",
+        "max_cell_id": "21"
     },
     "229": {
         "name": "Moulay Bousselham",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "moulay_bousselham",
+        "max_cell_id": "12"
     },
     "230": {
         "name": "Moulay Brahim",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "moulay_brahim",
+        "max_cell_id": "55"
     },
     "231": {
         "name": "Moulay Idriss Zerhoun",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "moulay_idriss_zerhoun",
+        "max_cell_id": "92"
     },
     "232": {
         "name": "Moulay Ya\u00e2coub",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "moulay_yaacoub",
+        "max_cell_id": "66"
     },
     "233": {
         "name": "Moussaoua",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "moussaoua",
+        "max_cell_id": "19"
     },
     "234": {
         "name": "MyAliCherif",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "myalicherif",
+        "max_cell_id": "61"
     },
     "235": {
         "name": "Mzouda",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "mzouda",
+        "max_cell_id": "22"
     },
     "236": {
         "name": "M\u00e9diouna",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "mediouna",
+        "max_cell_id": "15"
     },
     "237": {
         "name": "N'Zalat Bni Amar",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "n_zalat_bni_amar",
+        "max_cell_id": "94"
     },
     "238": {
         "name": "Nador",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "nador",
+        "max_cell_id": "81"
     },
     "239": {
         "name": "Naima",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "naima",
+        "max_cell_id": "23"
     },
     "240": {
         "name": "Oualidia",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oualidia",
+        "max_cell_id": "35"
     },
     "241": {
         "name": "Ouaouizeght",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "ouaouizeght",
+        "max_cell_id": "100"
     },
     "242": {
         "name": "Ouaoumana",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "ouaoumana",
+        "max_cell_id": "58"
     },
     "243": {
         "name": "Ouarzazate",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "ouarzazate",
+        "max_cell_id": "41"
     },
     "244": {
         "name": "Ouazzane",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "ouazzane",
+        "max_cell_id": "92"
     },
     "245": {
         "name": "Oued Amlil",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "oued_amlil",
+        "max_cell_id": "98"
     },
     "246": {
         "name": "Oued Heimer",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "oued_heimer",
+        "max_cell_id": "23"
     },
     "247": {
         "name": "Oued Ifrane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "oued_ifrane",
+        "max_cell_id": "22"
     },
     "248": {
         "name": "Oued Laou",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "oued_laou",
+        "max_cell_id": "60"
     },
     "249": {
         "name": "Oued Rmel",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "oued_rmel",
+        "max_cell_id": "96"
     },
     "250": {
         "name": "Oued Zem",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "oued_zem",
+        "max_cell_id": "22"
     },
     "251": {
         "name": "Oued-Eddahab",
-        "region_id": "12"
+        "region_id": "12",
+        "pretty_name": "oued_eddahab",
+        "max_cell_id": "91"
     },
     "252": {
         "name": "Oujda",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "oujda",
+        "max_cell_id": "40"
     },
     "253": {
         "name": "Oulad Abbou",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_abbou",
+        "max_cell_id": "89"
     },
     "254": {
         "name": "Oulad Amrane",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_amrane",
+        "max_cell_id": "87"
     },
     "255": {
         "name": "Oulad Ayad",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "oulad_ayad",
+        "max_cell_id": "10"
     },
     "256": {
         "name": "Oulad Berhil",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "oulad_berhil",
+        "max_cell_id": "39"
     },
     "257": {
         "name": "Oulad Frej",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_frej",
+        "max_cell_id": "65"
     },
     "258": {
         "name": "Oulad Ghadbane",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_ghadbane",
+        "max_cell_id": "64"
     },
     "259": {
         "name": "Oulad H'Riz Sahel",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_h_riz_sahel",
+        "max_cell_id": "59"
     },
     "260": {
         "name": "Oulad M'Barek",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "oulad_m_barek",
+        "max_cell_id": "76"
     },
     "261": {
         "name": "Oulad M'rah",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_m_rah",
+        "max_cell_id": "31"
     },
     "262": {
         "name": "Oulad Sa\u00efd",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_said",
+        "max_cell_id": "50"
     },
     "263": {
         "name": "Oulad Sidi Ben Daoud",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "oulad_sidi_ben_daoud",
+        "max_cell_id": "37"
     },
     "264": {
         "name": "Oulad Te\u00efma",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "oulad_teima",
+        "max_cell_id": "73"
     },
     "265": {
         "name": "Oulad Yaich",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "oulad_yaich",
+        "max_cell_id": "44"
     },
     "266": {
         "name": "Oulad Zbair",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "oulad_zbair",
+        "max_cell_id": "24"
     },
     "267": {
         "name": "Ouled Tayeb",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ouled_tayeb",
+        "max_cell_id": "72"
     },
     "268": {
         "name": "Oulm\u00e8s",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "oulmes",
+        "max_cell_id": "23"
     },
     "269": {
         "name": "Ounagha",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "ounagha",
+        "max_cell_id": "26"
     },
     "270": {
         "name": "Outat El Haj",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "outat_el_haj",
+        "max_cell_id": "51"
     },
     "271": {
         "name": "Point Cires",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "point_cires",
+        "max_cell_id": "89"
     },
     "272": {
         "name": "Rabat",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "rabat",
+        "max_cell_id": "20"
     },
     "273": {
         "name": "Ras El A\u00efn",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "ras_el_ain",
+        "max_cell_id": "33"
     },
     "274": {
         "name": "Ras El Ma",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "ras_el_ma",
+        "max_cell_id": "44"
     },
     "275": {
         "name": "Ribate El Kheir",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "ribate_el_kheir",
+        "max_cell_id": "22"
     },
     "276": {
         "name": "Rissani",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "rissani",
+        "max_cell_id": "58"
     },
     "277": {
         "name": "Rommani",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "rommani",
+        "max_cell_id": "100"
     },
     "278": {
         "name": "Sabaa Aiyoun",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "sabaa_aiyoun",
+        "max_cell_id": "80"
     },
     "279": {
         "name": "Safi",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "safi",
+        "max_cell_id": "72"
     },
     "280": {
         "name": "Sal\u00e9",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sale",
+        "max_cell_id": "59"
     },
     "281": {
         "name": "Sarghine",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "sarghine",
+        "max_cell_id": "84"
     },
     "282": {
         "name": "Sa\u00efdia",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "saidia",
+        "max_cell_id": "19"
     },
     "283": {
         "name": "Sebt El Ma\u00e2rif",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sebt_el_maarif",
+        "max_cell_id": "97"
     },
     "284": {
         "name": "Sebt Gzoula",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sebt_gzoula",
+        "max_cell_id": "30"
     },
     "285": {
         "name": "Sebt Jahjouh",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "sebt_jahjouh",
+        "max_cell_id": "94"
     },
     "286": {
         "name": "Selouane",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "selouane",
+        "max_cell_id": "65"
     },
     "287": {
         "name": "Settat",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "settat",
+        "max_cell_id": "87"
     },
     "288": {
         "name": "Sid L'Mokhtar",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sid_l_mokhtar",
+        "max_cell_id": "41"
     },
     "289": {
         "name": "Sid Zouin",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sid_zouin",
+        "max_cell_id": "28"
     },
     "290": {
         "name": "Sidi Abdallah Ghiat",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sidi_abdallah_ghiat",
+        "max_cell_id": "27"
     },
     "291": {
         "name": "Sidi Addi",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "sidi_addi",
+        "max_cell_id": "84"
     },
     "292": {
         "name": "Sidi Ahmed",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sidi_ahmed",
+        "max_cell_id": "37"
     },
     "293": {
         "name": "Sidi Ali Ban Hamdouche",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sidi_ali_ban_hamdouche",
+        "max_cell_id": "87"
     },
     "294": {
         "name": "Sidi Allal El Bahraoui",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_allal_el_bahraoui",
+        "max_cell_id": "29"
     },
     "295": {
         "name": "Sidi Allal Tazi",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_allal_tazi",
+        "max_cell_id": "35"
     },
     "296": {
         "name": "Sidi Bennour",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sidi_bennour",
+        "max_cell_id": "79"
     },
     "297": {
         "name": "Sidi Bou Othmane",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sidi_bou_othmane",
+        "max_cell_id": "68"
     },
     "298": {
         "name": "Sidi Boubker",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "sidi_boubker",
+        "max_cell_id": "89"
     },
     "299": {
         "name": "Sidi Bouknadel",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_bouknadel",
+        "max_cell_id": "80"
     },
     "300": {
         "name": "Sidi Bouzid",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sidi_bouzid",
+        "max_cell_id": "36"
     },
     "301": {
         "name": "Sidi Ifni",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "sidi_ifni",
+        "max_cell_id": "89"
     },
     "302": {
         "name": "Sidi Jaber",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "sidi_jaber",
+        "max_cell_id": "35"
     },
     "303": {
         "name": "Sidi Kacem",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_kacem",
+        "max_cell_id": "81"
     },
     "304": {
         "name": "Sidi Lyamani",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "sidi_lyamani",
+        "max_cell_id": "42"
     },
     "305": {
         "name": "Sidi Mohamed ben Abdallah el-Raisuni",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "sidi_mohamed_ben_abdallah_el_raisuni",
+        "max_cell_id": "49"
     },
     "306": {
         "name": "Sidi Rahhal",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "sidi_rahhal",
+        "max_cell_id": "21"
     },
     "307": {
         "name": "Sidi Rahhal Chata\u00ef",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sidi_rahhal_chatai",
+        "max_cell_id": "50"
     },
     "308": {
         "name": "Sidi Slimane",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_slimane",
+        "max_cell_id": "32"
     },
     "309": {
         "name": "Sidi Slimane Echcharaa",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "sidi_slimane_echcharaa",
+        "max_cell_id": "36"
     },
     "310": {
         "name": "Sidi Sma\u00efl",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "sidi_smail",
+        "max_cell_id": "67"
     },
     "311": {
         "name": "Sidi Taibi",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_taibi",
+        "max_cell_id": "44"
     },
     "312": {
         "name": "Sidi Yahya El Gharb",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "sidi_yahya_el_gharb",
+        "max_cell_id": "32"
     },
     "313": {
         "name": "Skhinate",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "skhinate",
+        "max_cell_id": "71"
     },
     "314": {
         "name": "Skhirate",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "skhirate",
+        "max_cell_id": "57"
     },
     "315": {
         "name": "Skhour Rehamna",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "skhour_rehamna",
+        "max_cell_id": "44"
     },
     "316": {
         "name": "Skoura",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "skoura",
+        "max_cell_id": "82"
     },
     "317": {
         "name": "Smimou",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "smimou",
+        "max_cell_id": "62"
     },
     "318": {
         "name": "Soualem",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "soualem",
+        "max_cell_id": "61"
     },
     "319": {
         "name": "Souk El Arbaa",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "souk_el_arbaa",
+        "max_cell_id": "81"
     },
     "320": {
         "name": "Souk Sebt Oulad Nemma",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "souk_sebt_oulad_nemma",
+        "max_cell_id": "96"
     },
     "321": {
         "name": "Stehat",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "stehat",
+        "max_cell_id": "54"
     },
     "322": {
         "name": "S\u00e9frou",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "sefrou",
+        "max_cell_id": "14"
     },
     "323": {
         "name": "Tabounte",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tabounte",
+        "max_cell_id": "36"
     },
     "324": {
         "name": "Tafajight",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tafajight",
+        "max_cell_id": "72"
     },
     "325": {
         "name": "Tafetachte",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tafetachte",
+        "max_cell_id": "19"
     },
     "326": {
         "name": "Tafraout",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tafraout",
+        "max_cell_id": "10"
     },
     "327": {
         "name": "Taghjijt",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "taghjijt",
+        "max_cell_id": "53"
     },
     "328": {
         "name": "Taghzout",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "taghzout",
+        "max_cell_id": "75"
     },
     "329": {
         "name": "Tagzen",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tagzen",
+        "max_cell_id": "87"
     },
     "330": {
         "name": "Tahannaout",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tahannaout",
+        "max_cell_id": "64"
     },
     "331": {
         "name": "Tahla",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tahla",
+        "max_cell_id": "14"
     },
     "332": {
         "name": "Tala Tazegwaght",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "tala_tazegwaght",
+        "max_cell_id": "18"
     },
     "333": {
         "name": "Taliouine",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "taliouine",
+        "max_cell_id": "22"
     },
     "334": {
         "name": "Talmest",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "talmest",
+        "max_cell_id": "94"
     },
     "335": {
         "name": "Talsint",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "talsint",
+        "max_cell_id": "26"
     },
     "336": {
         "name": "Tamallalt",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tamallalt",
+        "max_cell_id": "83"
     },
     "337": {
         "name": "Tamanar",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tamanar",
+        "max_cell_id": "67"
     },
     "338": {
         "name": "Tamansourt",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tamansourt",
+        "max_cell_id": "26"
     },
     "339": {
         "name": "Tamassint",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "tamassint",
+        "max_cell_id": "100"
     },
     "340": {
         "name": "Tamegroute",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tamegroute",
+        "max_cell_id": "63"
     },
     "341": {
         "name": "Tameslouht",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "tameslouht",
+        "max_cell_id": "20"
     },
     "342": {
         "name": "Tamesna",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "tamesna",
+        "max_cell_id": "56"
     },
     "343": {
         "name": "Tamraght",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tamraght",
+        "max_cell_id": "52"
     },
     "344": {
         "name": "Tan-Tan",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "tan_tan",
+        "max_cell_id": "55"
     },
     "345": {
         "name": "Tanalt",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tanalt",
+        "max_cell_id": "42"
     },
     "346": {
         "name": "Tanger",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "tanger",
+        "max_cell_id": "49"
     },
     "347": {
         "name": "Tanoumrite Nkob Zagora",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tanoumrite_nkob_zagora",
+        "max_cell_id": "18"
     },
     "348": {
         "name": "Taounate",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "taounate",
+        "max_cell_id": "98"
     },
     "349": {
         "name": "Taourirt",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "taourirt",
+        "max_cell_id": "74"
     },
     "350": {
         "name": "Taourirt ait zaghar",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "taourirt_ait_zaghar",
+        "max_cell_id": "100"
     },
     "351": {
         "name": "Tarfaya",
-        "region_id": "11"
+        "region_id": "11",
+        "pretty_name": "tarfaya",
+        "max_cell_id": "99"
     },
     "352": {
         "name": "Targuist",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "targuist",
+        "max_cell_id": "30"
     },
     "353": {
         "name": "Taroudannt",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "taroudannt",
+        "max_cell_id": "80"
     },
     "354": {
         "name": "Tata",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tata",
+        "max_cell_id": "97"
     },
     "355": {
         "name": "Taza",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "taza",
+        "max_cell_id": "90"
     },
     "356": {
         "name": "Ta\u00efnaste",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tainaste",
+        "max_cell_id": "71"
     },
     "357": {
         "name": "Temsia",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "temsia",
+        "max_cell_id": "62"
     },
     "358": {
         "name": "Tendrara",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "tendrara",
+        "max_cell_id": "33"
     },
     "359": {
         "name": "Thar Es-Souk",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "thar_es_souk",
+        "max_cell_id": "41"
     },
     "360": {
         "name": "Tichoute",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tichoute",
+        "max_cell_id": "47"
     },
     "361": {
         "name": "Tiddas",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "tiddas",
+        "max_cell_id": "27"
     },
     "362": {
         "name": "Tiflet",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "tiflet",
+        "max_cell_id": "11"
     },
     "363": {
         "name": "Tifnit",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tifnit",
+        "max_cell_id": "58"
     },
     "364": {
         "name": "Tighassaline",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "tighassaline",
+        "max_cell_id": "44"
     },
     "365": {
         "name": "Tighza",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "tighza",
+        "max_cell_id": "18"
     },
     "366": {
         "name": "Timahdite",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "timahdite",
+        "max_cell_id": "76"
     },
     "367": {
         "name": "Tinejdad",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tinejdad",
+        "max_cell_id": "27"
     },
     "368": {
         "name": "Tisgdal",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tisgdal",
+        "max_cell_id": "94"
     },
     "369": {
         "name": "Tissa",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tissa",
+        "max_cell_id": "75"
     },
     "370": {
         "name": "Tit Mellil",
-        "region_id": "6"
+        "region_id": "6",
+        "pretty_name": "tit_mellil",
+        "max_cell_id": "20"
     },
     "371": {
         "name": "Tizguite",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tizguite",
+        "max_cell_id": "27"
     },
     "372": {
         "name": "Tizi Ouasli",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "tizi_ouasli",
+        "max_cell_id": "67"
     },
     "373": {
         "name": "Tiznit",
-        "region_id": "9"
+        "region_id": "9",
+        "pretty_name": "tiznit",
+        "max_cell_id": "47"
     },
     "374": {
         "name": "Tiztoutine",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "tiztoutine",
+        "max_cell_id": "54"
     },
     "375": {
         "name": "Touarga",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "touarga",
+        "max_cell_id": "13"
     },
     "376": {
         "name": "Touima",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "touima",
+        "max_cell_id": "98"
     },
     "377": {
         "name": "Touissit",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "touissit",
+        "max_cell_id": "98"
     },
     "378": {
         "name": "Toulal",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "toulal",
+        "max_cell_id": "64"
     },
     "379": {
         "name": "Toundoute",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "toundoute",
+        "max_cell_id": "13"
     },
     "380": {
         "name": "Tounfite",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "tounfite",
+        "max_cell_id": "96"
     },
     "381": {
         "name": "T\u00e9mara",
-        "region_id": "4"
+        "region_id": "4",
+        "pretty_name": "temara",
+        "max_cell_id": "89"
     },
     "382": {
         "name": "T\u00e9touan",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "tetouan",
+        "max_cell_id": "35"
     },
     "383": {
         "name": "Youssoufia",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "youssoufia",
+        "max_cell_id": "91"
     },
     "384": {
         "name": "Zag",
-        "region_id": "10"
+        "region_id": "10",
+        "pretty_name": "zag",
+        "max_cell_id": "16"
     },
     "385": {
         "name": "Zagora",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "zagora",
+        "max_cell_id": "95"
     },
     "386": {
         "name": "Zaouia d'Ifrane",
-        "region_id": "3"
+        "region_id": "3",
+        "pretty_name": "zaouia_d_ifrane",
+        "max_cell_id": "69"
     },
     "387": {
         "name": "Zaou\u00efat Cheikh",
-        "region_id": "5"
+        "region_id": "5",
+        "pretty_name": "zaouiat_cheikh",
+        "max_cell_id": "92"
     },
     "388": {
         "name": "Za\u00efda",
-        "region_id": "8"
+        "region_id": "8",
+        "pretty_name": "zaida",
+        "max_cell_id": "26"
     },
     "389": {
         "name": "Za\u00efo",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "zaio",
+        "max_cell_id": "56"
     },
     "390": {
         "name": "Zeghanghane",
-        "region_id": "2"
+        "region_id": "2",
+        "pretty_name": "zeghanghane",
+        "max_cell_id": "61"
     },
     "391": {
         "name": "Zeubelemok",
-        "region_id": "7"
+        "region_id": "7",
+        "pretty_name": "zeubelemok",
+        "max_cell_id": "17"
     },
     "392": {
         "name": "Zinat",
-        "region_id": "1"
+        "region_id": "1",
+        "pretty_name": "zinat",
+        "max_cell_id": "45"
     }
 }
