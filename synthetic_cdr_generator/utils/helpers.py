@@ -2,7 +2,7 @@
 This module contains helper functions for the synthetic CDR generator.
 """
 
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Tuple
 import random
 import json
 
@@ -159,9 +159,7 @@ def pick_cell_id(
     return f"{caller.home_city}_{number}"
 
 
-def get_duration_corresponding_to_technology(
-    technology: str
-) -> int:
+def get_duration_corresponding_to_technology(technology: str) -> int:
     """
     Get the duration corresponding to the technology.
 
@@ -172,15 +170,51 @@ def get_duration_corresponding_to_technology(
         int: The duration corresponding to the technology.
     """
     tech_scaling = {
-        "2G": 60,  
+        "2G": 60,
         "3G": 90,
         "4G": 150,
-        "5G": 180,  
+        "5G": 180,
     }
     scale = tech_scaling.get(technology, 90)
 
     duration = np.random.lognormal(mean=10, sigma=2) * scale
     return int(min(duration, 7200))
+
+
+def get_duration_data_usage_to_technology(technology: str) -> Tuple[int, float]:
+    """
+    Get the duration and data volume corresponding to the technology.
+
+    Args:
+        technology (str): The technology to get the duration and data volume for.
+
+    Returns:
+        Tuple[int, float]: The duration and data volume corresponding to the technology.
+    """
+    tech_duration_norm: Dict[str,Tuple[int,int]] = {
+        "2G": (60, 30),
+        "3G": (180, 90),
+        "4G": (300, 150),
+        "5G": (600, 300),
+    }
+
+    tech_speed_norm :Dict[str,Tuple[float,float]] = {
+        "2G": (0.05, 0.02),
+        "3G": (1, 0.5),
+        "4G": (15, 10),
+        "5G": (200, 100),
+    }
+    mean_dur, std_dur = tech_duration_norm.get(technology, (180, 90))
+    duration = max(1, int(random.gauss(mean_dur, std_dur)))
+    duration = min(duration, 2 * 3600)  # cap at 2 hours
+
+    mean_speed, std_speed = tech_speed_norm.get(technology, (10, 5))
+    speed = max(0.01, random.gauss(mean_speed, std_speed))
+
+    volume_bits = speed * 1_000_000 * duration
+    volume_mb = volume_bits / (8 * 1_000_000)
+
+    return duration, round(volume_mb, 2)
 
 
 if __name__ == "__main__":

@@ -9,6 +9,9 @@ from datetime import datetime
 class CallerProfile:
     """
     Represents a caller profile with a unique MSISDN and location information.
+    1. msisdn: Unique identifier for the caller.
+    2. home_city: City where the caller is located.
+    3. home_region: Region where the caller is located.
     """
 
     msisdn: str
