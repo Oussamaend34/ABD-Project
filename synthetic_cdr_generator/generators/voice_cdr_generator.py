@@ -5,7 +5,6 @@ This module defines the VoiceCDRGenerator class,
 
 from typing import List, Dict, Optional, Sequence
 from datetime import datetime
-import random
 
 from utils import load_geography, get_duration_corresponding_to_technology
 from utils.schemas import VoiceCDR, CallerProfile
@@ -22,7 +21,7 @@ class VoiceCDRGenerator(BaseGenerator):
         self,
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
-        technologies: Optional[List[str]] = None,
+        technologies: Optional[Dict[str, float]] = None,
         error_injector: Optional[ErrorInjector] = None,
         config: Optional[Dict[str, str]] = None,
     ):
@@ -31,7 +30,7 @@ class VoiceCDRGenerator(BaseGenerator):
             error injector, and configuration.
         """
         if technologies is None:
-            technologies = ["2G", "3G", "4G", "5G"]
+            technologies = {"2G": 0.05, "3G": 0.1, "4G": 0.6, "5G": 0.25}
         super().__init__(caller_pool, cities_data, technologies, error_injector, config)
         self.record_type = "voice"
 
@@ -43,7 +42,7 @@ class VoiceCDRGenerator(BaseGenerator):
         """
         caller: CallerProfile = self._get_random_caller()
         callee: CallerProfile = self._get_random_callee(caller)
-        technology: str = random.choice(self.technologies)
+        technology: str = self._get_technology()
         return VoiceCDR(
             record_type=self.record_type,
             caller_id=caller.msisdn,

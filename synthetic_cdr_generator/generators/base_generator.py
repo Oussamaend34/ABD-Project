@@ -3,6 +3,7 @@ This module contains the base class for all generators.
 """
 
 from typing import List, Dict, Optional, Union, Sequence
+import random
 from abc import ABC, abstractmethod
 from utils import (
     get_random_caller,
@@ -24,13 +25,13 @@ class BaseGenerator(ABC):
         self,
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
-        technologies: Optional[List[str]] = None,
+        technologies: Optional[Dict[str,float]] = None,
         error_injector: Optional[ErrorInjector] = None,
         config: Optional[Dict[str, str]] = None,
     ):
         self.caller_pool = caller_pool
         self.cities = cities_data
-        self.technologies = technologies if technologies is not None else []
+        self.technologies = technologies if technologies is not None else {}
         self.error_injector = error_injector
         self.config = config if config is not None else {}
 
@@ -63,3 +64,11 @@ class BaseGenerator(ABC):
         Pick a cell ID based on the caller's location.
         """
         return pick_cell_id(caller, self.cities)
+    
+    def _get_technology(self) -> str:
+        """
+        Get a random technology from the list of technologies.
+        """
+        technologies = list(self.technologies.keys())
+        probabilities = list(self.technologies.values())
+        return random.choices(technologies, weights=probabilities, k=1)[0]
