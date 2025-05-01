@@ -13,7 +13,6 @@ from utils import (
     pick_cell_id
 )
 from utils.schemas import VoiceCDR, SMSCDR, DataEDR, CallerProfile
-from error_injector import ErrorInjector
 
 
 class BaseGenerator(ABC):
@@ -26,13 +25,11 @@ class BaseGenerator(ABC):
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
         technologies: Optional[Dict[str,float]] = None,
-        error_injector: Optional[ErrorInjector] = None,
         config: Optional[Dict[str, str]] = None,
     ):
         self.caller_pool = caller_pool
         self.cities = cities_data
         self.technologies = technologies if technologies is not None else {}
-        self.error_injector = error_injector
         self.config = config if config is not None else {}
 
     @abstractmethod

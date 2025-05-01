@@ -8,7 +8,6 @@ from datetime import datetime
 
 from utils import load_geography, get_duration_data_usage_to_technology
 from utils.schemas import DataEDR, CallerProfile
-from error_injector import ErrorInjector
 from .base_generator import BaseGenerator
 
 
@@ -22,7 +21,6 @@ class DataEDRGenerator(BaseGenerator):
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
         technologies: Optional[Dict[str, float]] = None,
-        error_injector: Optional[ErrorInjector] = None,
         config: Optional[Dict[str, str]] = None,
     ):
         """
@@ -31,7 +29,7 @@ class DataEDRGenerator(BaseGenerator):
         """
         if technologies is None:
             technologies = {"2G": 0.05, "3G": 0.1, "4G": 0.6, "5G": 0.25}
-        super().__init__(caller_pool, cities_data, technologies, error_injector, config)
+        super().__init__(caller_pool, cities_data, technologies, config)
         self.record_type = "data"
 
     def generate(self) -> DataEDR:

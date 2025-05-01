@@ -170,15 +170,18 @@ def get_duration_corresponding_to_technology(technology: str) -> int:
         int: The duration corresponding to the technology.
     """
     tech_scaling = {
-        "2G": 60,
-        "3G": 90,
-        "4G": 150,
-        "5G": 180,
+        "2G": 0.5,   # slower → shorter average
+        "3G": 1.0,
+        "4G": 1.3,
+        "5G": 1.6,
     }
-    scale = tech_scaling.get(technology, 90)
+    scale = tech_scaling.get(technology, 1.0)
 
-    duration = np.random.lognormal(mean=10, sigma=2) * scale
-    return int(min(duration, 7200))
+    # Adjusted parameters to generate realistic duration
+    base_duration = np.random.lognormal(mean=2.5, sigma=1.5)  # ~12–300s typical
+    duration = base_duration * 60 * scale                     # convert to seconds and scale
+
+    return int(min(duration, 7200))  # cap at 2 hours
 
 
 def get_duration_data_usage_to_technology(technology: str) -> Tuple[int, float]:
