@@ -1,0 +1,46 @@
+{
+  "type": "record",
+  "name": "DataEDR",
+  "namespace": "com.abd.telecom",
+  "doc": "Represents a data event detail record (EDR) with relevant information.",
+  "fields": [
+    {
+      "name": "record_type",
+      "type": "string",
+      "doc": "Type of the record (e.g., 'data')"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Timestamp of the record"
+    },
+    {
+      "name": "user_id",
+      "type": "string",
+      "doc": "ID of the user"
+    },
+    {
+      "name": "data_volume_mb",
+      "type": "double",
+      "doc": "Volume of data used in megabytes"
+    },
+    {
+      "name": "session_duration_sec",
+      "type": "int",
+      "doc": "Duration of the session in seconds"
+    },
+    {
+      "name": "cell_id",
+      "type": "string",
+      "doc": "ID of the cell tower used"
+    },
+    {
+      "name": "technology",
+      "type": "string",
+      "doc": "Technology used (e.g., 'GPRS', 'LTE')"
+    }
+  ]
+}

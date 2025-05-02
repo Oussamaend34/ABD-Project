@@ -1,0 +1,46 @@
+{
+  "type": "record",
+  "name": "VoiceCDR",
+  "namespace": "com.ensah.telecom.voice",
+  "doc": "Represents a voice call detail record (CDR) with relevant information.",
+  "fields": [
+    {
+      "name": "record_type",
+      "type": "string",
+      "doc": "Type of the record (e.g., 'voice')"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Timestamp of the call"
+    },
+    {
+      "name": "caller_id",
+      "type": "string",
+      "doc": "ID of the caller"
+    },
+    {
+      "name": "callee_id",
+      "type": "string",
+      "doc": "ID of the callee"
+    },
+    {
+      "name": "duration_sec",
+      "type": "int",
+      "doc": "Duration of the call in seconds"
+    },
+    {
+      "name": "cell_id",
+      "type": "string",
+      "doc": "ID of the cell tower used"
+    },
+    {
+      "name": "technology",
+      "type": "string",
+      "doc": "Technology used (e.g., '2G', '3G', '4G', '5G')"
+    }
+  ]
+}

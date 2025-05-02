@@ -10,7 +10,7 @@ from utils import (
     get_random_callee,
     load_geography,
     pick_location,
-    pick_cell_id
+    pick_cell_id,
 )
 from utils.schemas import VoiceCDR, SMSCDR, DataEDR, CallerProfile
 
@@ -24,7 +24,7 @@ class BaseGenerator(ABC):
         self,
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
-        technologies: Optional[Dict[str,float]] = None,
+        technologies: Optional[Dict[str, float]] = None,
         config: Optional[Dict[str, str]] = None,
     ):
         self.caller_pool = caller_pool
@@ -39,7 +39,9 @@ class BaseGenerator(ABC):
         """
 
     @abstractmethod
-    def generate_batch(self, batch_size: int) -> Sequence[Union[VoiceCDR, SMSCDR, DataEDR]]:
+    def generate_batch(
+        self, batch_size: int
+    ) -> Sequence[Union[VoiceCDR, SMSCDR, DataEDR]]:
         """
         Generate a batch of synthetic records.
         """
@@ -61,7 +63,7 @@ class BaseGenerator(ABC):
         Pick a cell ID based on the caller's location.
         """
         return pick_cell_id(caller, self.cities)
-    
+
     def _get_technology(self) -> str:
         """
         Get a random technology from the list of technologies.

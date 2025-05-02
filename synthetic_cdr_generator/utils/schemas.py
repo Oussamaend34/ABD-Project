@@ -1,6 +1,7 @@
 """
     This m
 """
+from abc import ABC
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -18,8 +19,13 @@ class CallerProfile:
     home_city: str
     home_region: str
 
+class CDR(ABC):
+    """
+    Base class for Call Detail Records (CDRs).
+    This class serves as a base for specific types of CDRs.
+    """
 @dataclass
-class VoiceCDR:
+class VoiceCDR(CDR):
     """
     Represents a voice call detail record (CDR) with relevant information.
     1. record_type: Type of the record (e.g., "Voice").
@@ -40,7 +46,7 @@ class VoiceCDR:
 
 
 @dataclass
-class SMSCDR:
+class SMSCDR(CDR):
     """
     Represents a short message service (SMS) call detail record (CDR) with relevant information.
     1. record_type: Type of the record (e.g., "SMS").
@@ -59,7 +65,7 @@ class SMSCDR:
 
 
 @dataclass
-class DataEDR:
+class DataEDR(CDR):
     """
     Represents a data event detail record (EDR) with relevant information.
     1. record_type: Type of the record (e.g., "Data").
