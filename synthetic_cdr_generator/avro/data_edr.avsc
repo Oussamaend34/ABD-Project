@@ -41,6 +41,11 @@
       "name": "technology",
       "type": "string",
       "doc": "Technology used (e.g., 'GPRS', 'LTE')"
+    },
+    {
+      "name": "uuid",
+      "type": "string",
+      "doc": "Unique identifier for the data record"
     }
   ]
 }

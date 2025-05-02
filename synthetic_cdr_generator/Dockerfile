@@ -1,14 +1,17 @@
-# Use official Python image
+# Use slim Python base image
 FROM python:3.13-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY . /app
+# Copy only necessary files, ignoring .venv and other junk
+COPY . .
 
-# Install dependencies if requirements.txt exists
-RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi
+# Delete .venv if it accidentally got copied (safety)
+RUN rm -rf .venv
 
-# Default command
-CMD ["python"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set default command to run the generator
+CMD ["python", "main.py"]

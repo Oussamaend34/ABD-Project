@@ -1,31 +1,98 @@
-volume_per_hour: 10000
+kafka:
+  bootstrap.servers: "localhost:9092,localhost:9093,localhost:9094"
+  linger.ms: "1"
+  compression.type: "gzip"
+  retries: "10"
+  delivery.timeout.ms: "30000"
 
-error_ratio:
-  missing_fields: 0.02
-  corrupted_data: 0.015
-  duplicates: 0.01
-  out_of_order_timestamps: 0.005
+schema_registry:
+  url: "http://localhost:8081"
 
-service_distribution:
-  voice: 0.6
-  data: 0.3
-  sms: 0.1
+topics:
+  voice: "cdr.voice"
+  sms: "cdr.sms"
+  data: "cdr.data"
+
+subjects:
+  voice: "cdr.voice-value"
+  sms: "cdr.sms-value"
+  data: "cdr.data-value"
+
+generation:
+  pool_size: 1000
+  seed: 
+  records_per_hour: 30000
+  distribution:
+    voice: 0.6
+    sms: 0.2
+    data: 0.2
+
+
+errors:
+  enabled: true
+  rate: 0.1
+  types:
+    missing_field: 0.3
+    negative_value: 0.2
+    invalid_type: 0.2
+    out_of_order_timestamp: 0.2
+    duplicate_flag: 0.1
 
 technologies:
-  - 2G
-  - 3G
-  - 4G
-  - 5G
+  2G: 0.1
+  3G: 0.2
+  4G: 0.4
+  5G: 0.3
+
+call_duration:
+  default: 1.0
+  max : 7200
+  technologies:
+    2G: 0.5
+    3G: 1.0
+    4G: 1.5
+    5G: 1.6
+  distribution:
+    mean: 2.5
+    sigma: 1.5
 
 
+data_duration_usage:
+  default:
+    mean: 180
+    sigma: 90
+  overrides:
+    2G: 
+      mean: 60
+      sigma: 30
+    3G: 
+      mean: 180
+      sigma: 90
+    4G: 
+      mean: 300
+      sigma: 150
+    5G: 
+      mean: 600
+      sigma: 300
 
-output:
-  mode: "file"  # options: file, kafka
-  file_format: "json"
-  output_dir: "./output"
-  kafka_topic: "cdr_events"
-  kafka_bootstrap_servers: "localhost:9092"
+data_speed:
+  default:
+    mean: 10
+    sigma: 5
+  overrides:
+    2G:
+      mean: 0.02
+      sigma: 0.05
+    3G:
+      mean: 1
+      sigma: 0.5
+    4G:
+      mean: 15
+      sigma: 10
+    5G:
+      mean: 200
+      sigma: 100
 
-time_distribution:
-  peak_hours: [8, 20]  # 8AM - 8PM
-  off_peak_multiplier: 0.5  # activity multiplier during off-peak
+files:
+  cities: "utils/cities.json"
+  regions: "utils/regions.json"

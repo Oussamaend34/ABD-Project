@@ -9,6 +9,16 @@ import json
 import numpy as np
 
 from .schemas import CallerProfile
+from .config_loader import (
+    load_config,
+    load_call_duration_config,
+    load_data_duration_usage_config,
+    load_data_speed_config,
+    load_files_config,
+)
+
+
+CONFIG = load_config()
 
 
 def _generate_msisdn() -> str:
@@ -32,9 +42,12 @@ def load_geography() -> Dict[str, Dict[str, str]]:
     Returns:
         Dict[str, Dict[str, str]]: A dictionary mapping city names to their regions and countries.
     """
-    with open("./utils/cities.json", "r", encoding="utf-8") as f:
+    files = load_files_config(CONFIG)
+    cities_file = files.get("cities")
+    regions_file = files.get("regions")
+    with open(cities_file, "r", encoding="utf-8") as f:
         cities = json.load(f)
-    with open("./utils/regions.json", "r", encoding="utf-8") as f:
+    with open(regions_file, "r", encoding="utf-8") as f:
         regions = json.load(f)
     regions_map = {key: value["name"] for key, value in regions.items()}
     for city in cities:
@@ -169,19 +182,17 @@ def get_duration_corresponding_to_technology(technology: str) -> int:
     Returns:
         int: The duration corresponding to the technology.
     """
-    tech_scaling = {
-        "2G": 0.5,   # slower → shorter average
-        "3G": 1.0,
-        "4G": 1.3,
-        "5G": 1.6,
-    }
-    scale = tech_scaling.get(technology, 1.0)
+    config = load_call_duration_config(CONFIG)
+    tech_scaling = config["technologies"]
+    scale = tech_scaling.get(technology, config["default"])
 
     # Adjusted parameters to generate realistic duration
-    base_duration = np.random.lognormal(mean=2.5, sigma=1.5)  # ~12–300s typical
-    duration = base_duration * 60 * scale                     # convert to seconds and scale
+    base_duration = np.random.lognormal(
+        mean=config["distribution"]["mean"], sigma=config["distribution"]["sigma"]
+    )
+    duration = base_duration * 60 * scale
 
-    return int(min(duration, 7200))  # cap at 2 hours
+    return int(min(duration, config["max"]))
 
 
 def get_duration_data_usage_to_technology(technology: str) -> Tuple[int, float]:
@@ -194,24 +205,24 @@ def get_duration_data_usage_to_technology(technology: str) -> Tuple[int, float]:
     Returns:
         Tuple[int, float]: The duration and data volume corresponding to the technology.
     """
-    tech_duration_norm: Dict[str,Tuple[int,int]] = {
-        "2G": (60, 30),
-        "3G": (180, 90),
-        "4G": (300, 150),
-        "5G": (600, 300),
-    }
 
-    tech_speed_norm :Dict[str,Tuple[float,float]] = {
-        "2G": (0.05, 0.02),
-        "3G": (1, 0.5),
-        "4G": (15, 10),
-        "5G": (200, 100),
-    }
-    mean_dur, std_dur = tech_duration_norm.get(technology, (180, 90))
+    config_duration = load_data_duration_usage_config(CONFIG)
+    config_speed = load_data_speed_config(CONFIG)
+
+    tech_duration_norm = config_duration["overrides"]
+
+    tech_speed_norm = config_speed["overrides"]
+
+    mean_dur, std_dur = tech_duration_norm.get(
+        technology,
+        (config_duration["default"][0], config_duration["default"][1]),
+    )
     duration = max(1, int(random.gauss(mean_dur, std_dur)))
     duration = min(duration, 2 * 3600)  # cap at 2 hours
 
-    mean_speed, std_speed = tech_speed_norm.get(technology, (10, 5))
+    mean_speed, std_speed = tech_speed_norm.get(
+        technology, (config_speed["default"][0], config_speed["default"][1])
+    )
     speed = max(0.01, random.gauss(mean_speed, std_speed))
 
     volume_bits = speed * 1_000_000 * duration

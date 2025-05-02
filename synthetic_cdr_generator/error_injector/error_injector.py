@@ -77,25 +77,40 @@ class ErrorInjector:
         return random.choices(types, weights=weights, k=1)[0]
 
     def _inject_missing_field(self, record: Dict[str, Any]):
-        keys = list(record.keys())
-        keys = [k for k in keys]
-        field = random.choice(keys)
-        record[field] = None
+        # Protect required fields for Avro
+        protected = ["record_type", "uuid", "timestamp", "caller_id", "sender_id", "user_id"]
+        keys = [k for k in record if k not in protected]
+        if keys:
+            field = random.choice(keys)
+            if isinstance(record[field], str):
+                record[field] = ""  # simulate missing/blank
+            elif isinstance(record[field], (int, float)):
+                record[field] = -9999  # invalid value
+            else:
+                record[field] = "?"  # default fallback
 
     def _inject_negative_value(self, record: Dict[str, Any]):
         keys = list(record.keys())
         keys = [k for k in keys if isinstance(record[k], (int, float))]
+        if not keys:
+            return
         field = random.choice(keys)
         record[field] = -abs(record[field])
 
     def _inject_invalid_type(self, record: Dict[str, Any]):
-        keys = list(record.keys())
+        protected = ["record_type", "uuid", "timestamp", "caller_id", "sender_id", "user_id"]
+        keys = [k for k in record if k not in protected]
+        if not keys:
+            return
+
         key = random.choice(keys)
-        original = record[key]
-        if isinstance(original, (int, float)):
-            record[key] = float("NaN")
-        elif isinstance(original, str):
-            record[key] = 99999
+        value = record[key]
+
+        # Corrupt without changing type class
+        if isinstance(value, (int, float)):
+            record[key] = -9999  # or 9999999999
+        elif isinstance(value, str):
+            record[key] = "INVALID!@#"
 
     def _inject_old_timestamp(self, record: Dict[str, Any]):
         if "timestamp" in record:

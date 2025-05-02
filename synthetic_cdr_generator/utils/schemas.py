@@ -1,9 +1,10 @@
 """
-    This m
+    This module contains the schema definitions for various types of call detail records (CDRs).
 """
 from abc import ABC
 from dataclasses import dataclass
 from datetime import datetime
+from uuid import uuid4
 
 
 @dataclass
@@ -19,6 +20,7 @@ class CallerProfile:
     home_city: str
     home_region: str
 
+@dataclass
 class CDR(ABC):
     """
     Base class for Call Detail Records (CDRs).
@@ -43,6 +45,7 @@ class VoiceCDR(CDR):
     duration_sec: int
     cell_id: str
     technology: str
+    uuid: str = uuid4().hex
 
 
 @dataclass
@@ -62,6 +65,7 @@ class SMSCDR(CDR):
     receiver_id: str
     cell_id: str
     technology: str
+    uuid: str = uuid4().hex
 
 
 @dataclass
@@ -83,3 +87,4 @@ class DataEDR(CDR):
     session_duration_sec: int
     cell_id: str
     technology: str
+    uuid: str = uuid4().hex

@@ -5,6 +5,7 @@ This module defines the VoiceCDRGenerator class,
 
 from typing import List, Dict, Optional, Sequence
 from datetime import datetime
+from uuid import uuid4
 
 from utils import load_geography, get_duration_corresponding_to_technology
 from utils.schemas import VoiceCDR, CallerProfile
@@ -21,7 +22,6 @@ class VoiceCDRGenerator(BaseGenerator):
         caller_pool: List[CallerProfile],
         cities_data: Dict[str, Dict[str, str]] = load_geography(),
         technologies: Optional[Dict[str, float]] = None,
-        config: Optional[Dict[str, str]] = None,
     ):
         """
         Initialize the VoiceCDRGenerator with a caller pool, geography data,
@@ -29,7 +29,7 @@ class VoiceCDRGenerator(BaseGenerator):
         """
         if technologies is None:
             technologies = {"2G": 0.05, "3G": 0.1, "4G": 0.6, "5G": 0.25}
-        super().__init__(caller_pool, cities_data, technologies, config)
+        super().__init__(caller_pool, cities_data, technologies)
         self.record_type = "voice"
 
     def generate(self) -> VoiceCDR:
@@ -51,6 +51,7 @@ class VoiceCDRGenerator(BaseGenerator):
             ),
             cell_id=self._pick_cell_id(caller=caller),
             technology=technology,
+            uuid=uuid4().hex,
         )
 
     def generate_batch(self, batch_size: int) -> Sequence[VoiceCDR]:
