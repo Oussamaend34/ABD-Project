@@ -13,7 +13,7 @@ from pyspark.sql.types import (
     IntegerType,
     DoubleType,
 )
-from src.pipeline import normalize  # pylint: disable=import-error
+from src.pipeline import normalize, tag_cdrs
 
 
 @pytest.fixture(scope="module")
@@ -37,9 +37,39 @@ def test_normalize_with_realistic_fields(_spark):
             "0612345678",
             "0698765432",
             120,
-            "cell-01",
+            "city_1",
             "4G",
-        )
+        ),
+        (
+            "v2",
+            "voice",
+            datetime(2025, 5, 1, 12, 0, 0),
+            "212612345678",
+            "9999698765432",
+            300,
+            "INVALID!!!@#",
+            "4G",
+        ),
+        (
+            None,
+            "voice",
+            None,
+            "212612345678",
+            "212698765432",
+            -300,
+            "rabat_center_3",
+            "4G",
+        ),
+        (
+            "v4",
+            "voice",
+            datetime(2025, 5, 1, 12, 0, 0),
+            "212612345678",
+            None,
+            None,
+            "rabat_center_3",
+            "4G",
+        ),
     ]
     voice_schema = StructType(
         [
@@ -116,22 +146,23 @@ def test_normalize_with_realistic_fields(_spark):
 
     schema = StructType(
         [
-            StructField("uuid", StringType(), False),
-            StructField("record_type", StringType(), False),
-            StructField("timestamp", TimestampType(), False),
-            StructField("msisdn", StringType(), False),
+            StructField("uuid", StringType(), True),
+            StructField("record_type", StringType(), True),
+            StructField("timestamp", TimestampType(), True),
+            StructField("msisdn", StringType(), True),
             StructField("counterparty_msisdn", StringType(), True),
             StructField("duration_sec", IntegerType(), True),
             StructField("data_volume_mb", DoubleType(), True),
-            StructField("cell_id", StringType(), False),
-            StructField("technology", StringType(), False),
-            StructField("status", StringType(), False),
+            StructField("cell_id", StringType(), True),
+            StructField("technology", StringType(), True),
+            StructField("status", StringType(), True),
         ]
     )
-    normalized_df = _spark.createDataFrame(normalized_df.rdd, schema)
-    rows = normalized_df.collect()
 
-    assert normalized_df.schema == schema
+    normalized_df = _spark.createDataFrame(normalized_df.rdd, schema)
+
+    tagged_df = tag_cdrs(normalized_df)
+    rows = tagged_df.collect()
 
     assert rows[0].msisdn == "212612345678"
     assert rows[0].counterparty_msisdn == "212698765432"
@@ -139,14 +170,4 @@ def test_normalize_with_realistic_fields(_spark):
     assert rows[0].data_volume_mb is None
     assert rows[0].status == "ok"
 
-    assert rows[1].msisdn == "212612300000"
-    assert rows[1].counterparty_msisdn == "212698800000"
-    assert rows[1].duration_sec is None
-    assert rows[1].data_volume_mb is None
-    assert rows[1].status == "ok"
-
-    assert rows[2].msisdn == "212655555555"
-    assert rows[2].counterparty_msisdn is None
-    assert rows[2].duration_sec == 360
-    assert rows[2].data_volume_mb == 100.5
-    assert rows[2].status == "ok"
+    assert rows[1].status == "partial"

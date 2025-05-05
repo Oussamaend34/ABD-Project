@@ -47,8 +47,7 @@
     },
     {
       "name": "status",
-      "type": ["null", "string"],
-      "default": null
+      "type": "string"
     }
   ]
 }

@@ -1,134 +1,171 @@
+---
 services:
-  kafka-1:
-    image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka-1
-    hostname: kafka-1
-    ports:
-      - "9092:9092"
+  controller-1:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
     environment:
       KAFKA_NODE_ID: 1
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,INTERNAL://0.0.0.0:19092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://kafka-1:19092
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_LOG_DIRS: /var/lib/kafka/data
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_DELETE_TOPIC_ENABLE: "true"
-      CLUSTER_ID: 1aBB-4w-TyaHyIX_I8yVwg
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://localhost:19093'
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_CLIENT_AUTH: requested
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_FILENAME: kafka.controller1.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.controller1.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_CREDENTIALS: controller1_keystore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEY_CREDENTIALS: controller1_sslkey_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_FILENAME: kafka.controller1.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.controller1.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_CREDENTIALS: controller1_truststore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
     volumes:
-      - kafka1-data:/var/lib/kafka/data
-    entrypoint: |
-      bash -c 'if [ ! -f "/var/lib/kafka/data/meta.properties" ]; then
-        kafka-storage format --cluster-id=$${CLUSTER_ID} --ignore-formatted --config /etc/kafka/kafka.properties;
-      fi;
-      exec /etc/confluent/docker/run'
-    networks:
-      - kafka-net
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"
 
-  kafka-2:
-    image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka-2
-    hostname: kafka-2
-    ports:
-      - "9093:9092"
+  controller-2:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
     environment:
       KAFKA_NODE_ID: 2
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,INTERNAL://0.0.0.0:19092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093,INTERNAL://kafka-2:19092
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_LOG_DIRS: /var/lib/kafka/data
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_DELETE_TOPIC_ENABLE: "true"
-      CLUSTER_ID: 1aBB-4w-TyaHyIX_I8yVwg
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://localhost:29093'
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_CLIENT_AUTH: requested
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_FILENAME: kafka.controller2.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.controller2.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_CREDENTIALS: controller2_keystore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEY_CREDENTIALS: controller2_sslkey_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_FILENAME: kafka.controller2.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.controller2.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_CREDENTIALS: controller2_truststore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
     volumes:
-      - kafka2-data:/var/lib/kafka/data
-    entrypoint: |
-      bash -c 'if [ ! -f "/var/lib/kafka/data/meta.properties" ]; then
-        kafka-storage format --cluster-id=$${CLUSTER_ID} --ignore-formatted --config /etc/kafka/kafka.properties;
-      fi;
-      exec /etc/confluent/docker/run'
-    networks:
-      - kafka-net
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"
 
-  kafka-3:
-    image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka-3
-    hostname: kafka-3
-    ports:
-      - "9094:9092"
+  controller-3:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
     environment:
       KAFKA_NODE_ID: 3
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,INTERNAL://0.0.0.0:19092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094,INTERNAL://kafka-3:19092
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_LOG_DIRS: /var/lib/kafka/data
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_DELETE_TOPIC_ENABLE: "true"
-      CLUSTER_ID: 1aBB-4w-TyaHyIX_I8yVwg
+      KAFKA_PROCESS_ROLES: 'controller'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENERS: 'CONTROLLER://localhost:39093'
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_CLIENT_AUTH: requested
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_FILENAME: kafka.controller3.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.controller3.keystore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEYSTORE_CREDENTIALS: controller3_keystore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_KEY_CREDENTIALS: controller3_sslkey_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_FILENAME: kafka.controller3.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.controller3.truststore.jks
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_PASSWORD: confluent
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_TRUSTSTORE_CREDENTIALS: controller3_truststore_creds
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
     volumes:
-      - kafka3-data:/var/lib/kafka/data
-    entrypoint: |
-      bash -c 'if [ ! -f "/var/lib/kafka/data/meta.properties" ]; then
-        kafka-storage format --cluster-id=$${CLUSTER_ID} --ignore-formatted --config /etc/kafka/kafka.properties;
-      fi;
-      exec /etc/confluent/docker/run'
-    networks:
-      - kafka-net
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"
 
-  schema-registry:
-    image: confluentinc/cp-schema-registry:7.5.0
-    container_name: schema-registry
-    ports:
-      - "8081:8081"
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19092,kafka-3:19092
+  kafka-ssl-1:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
-    networks:
-      - kafka-net
-
-  redpanda-console:
-    image: docker.redpanda.com/redpandadata/console:v3.1.0
-    container_name: redpanda-console
-    entrypoint: /bin/sh
-    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml && /app/console -config.filepath /tmp/config.yml'
+      - controller-1
+      - controller-2
+      - controller-3
     environment:
-      CONSOLE_CONFIG_FILE: |
-        kafka:
-          brokers: ["kafka-1:19092", "kafka-2:19092", "kafka-3:19092"]
-        schemaRegistry:
-          enabled: true
-          urls: ["http://schema-registry:8081"]
-    ports:
-      - 8080:8080
+      KAFKA_NODE_ID: 4
+      KAFKA_PROCESS_ROLES: 'broker'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL,SSL:SSL'
+      KAFKA_LISTENER_NAME_SSL_SSL_CLIENT_AUTH: requested
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_ADVERTISED_LISTENERS: SSL://localhost:19092
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.broker1.keystore.jks
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: broker1_keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: broker1_sslkey_creds
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.broker1.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: broker1_truststore_creds
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      KAFKA_SSL_CLIENT_AUTH: requested
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
+    volumes:
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"
+
+  kafka-ssl-2:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
-      - schema-registry
-    networks:
-      - kafka-net
+      - controller-1
+      - controller-2
+      - controller-3
+    environment:
+      KAFKA_NODE_ID: 5
+      KAFKA_PROCESS_ROLES: 'broker'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL,SSL:SSL'
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_CLIENT_AUTH: requested
+      KAFKA_LISTENER_NAME_SSL_SSL_CLIENT_AUTH: requested
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_ADVERTISED_LISTENERS: SSL://localhost:29092
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.broker2.keystore.jks
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: broker2_keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: broker2_sslkey_creds
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.broker2.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: broker2_truststore_creds
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      KAFKA_SSL_CLIENT_AUTH: requested
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
+    volumes:
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"
 
-volumes:
-  kafka1-data:
-  kafka2-data:
-  kafka3-data:
-
-networks:
-  kafka-net:
-    driver: bridge
+  kafka-ssl-3:
+    image: confluentinc/cp-kafka:latest
+    network_mode: host
+    depends_on:
+      - controller-1
+      - controller-2
+      - controller-3
+    environment:
+      KAFKA_NODE_ID: 6
+      KAFKA_PROCESS_ROLES: 'broker'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:SSL,SSL:SSL'
+      KAFKA_LISTENER_NAME_CONTROLLER_SSL_CLIENT_AUTH: requested
+      KAFKA_LISTENER_NAME_SSL_SSL_CLIENT_AUTH: requested
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:19093,2@localhost:29093,3@localhost:39093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_ADVERTISED_LISTENERS: SSL://localhost:39092
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.broker3.keystore.jks
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: broker3_keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: broker3_sslkey_creds
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.broker3.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: broker3_truststore_creds
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      KAFKA_SSL_CLIENT_AUTH: requested
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
+    volumes:
+      - ${KAFKA_SSL_SECRETS_DIR}:/etc/kafka/secrets
+    extra_hosts:
+      - "moby:127.0.0.1"

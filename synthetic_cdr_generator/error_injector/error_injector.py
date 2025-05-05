@@ -78,16 +78,19 @@ class ErrorInjector:
 
     def _inject_missing_field(self, record: Dict[str, Any]):
         # Protect required fields for Avro
-        protected = ["record_type", "uuid", "timestamp", "caller_id", "sender_id", "user_id"]
+        protected = [
+            "record_type",
+            "uuid",
+        ]
         keys = [k for k in record if k not in protected]
         if keys:
             field = random.choice(keys)
             if isinstance(record[field], str):
-                record[field] = ""  # simulate missing/blank
+                record[field] = ""
             elif isinstance(record[field], (int, float)):
-                record[field] = -9999  # invalid value
+                record[field] = -9999
             else:
-                record[field] = "?"  # default fallback
+                record[field] = "?"
 
     def _inject_negative_value(self, record: Dict[str, Any]):
         keys = list(record.keys())
@@ -98,7 +101,14 @@ class ErrorInjector:
         record[field] = -abs(record[field])
 
     def _inject_invalid_type(self, record: Dict[str, Any]):
-        protected = ["record_type", "uuid", "timestamp", "caller_id", "sender_id", "user_id"]
+        protected = [
+            "record_type",
+            "uuid",
+            "timestamp",
+            "caller_id",
+            "sender_id",
+            "user_id",
+        ]
         keys = [k for k in record if k not in protected]
         if not keys:
             return
@@ -108,7 +118,7 @@ class ErrorInjector:
 
         # Corrupt without changing type class
         if isinstance(value, (int, float)):
-            record[key] = -9999  # or 9999999999
+            record[key] = -9999
         elif isinstance(value, str):
             record[key] = "INVALID!@#"
 

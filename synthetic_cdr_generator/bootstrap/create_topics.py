@@ -12,9 +12,9 @@ admin_config = {
 
 admin_client = AdminClient(admin_config)
 
-voice_cdr_topic = NewTopic("cdr.voice", num_partitions=3, replication_factor=2)  # type: ignore
-sms_cdr_topic = NewTopic("cdr.sms", num_partitions=3, replication_factor=2)  # type: ignore
-data_edr_topic = NewTopic("cdr.data", num_partitions=3, replication_factor=2)  # type: ignore
+voice_cdr_topic = NewTopic("cdr.voice", num_partitions=3, replication_factor=3)  # type: ignore
+sms_cdr_topic = NewTopic("cdr.sms", num_partitions=3, replication_factor=3)  # type: ignore
+data_edr_topic = NewTopic("cdr.data", num_partitions=3, replication_factor=3)  # type: ignore
 
 topic_results = admin_client.create_topics(  # type: ignore
     [voice_cdr_topic, sms_cdr_topic, data_edr_topic]

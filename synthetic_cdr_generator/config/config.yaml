@@ -21,7 +21,7 @@ subjects:
 generation:
   pool_size: 1000
   seed: 
-  records_per_hour: 30000
+  records_per_hour: 7200
   distribution:
     voice: 0.6
     sms: 0.2
@@ -30,12 +30,12 @@ generation:
 
 errors:
   enabled: true
-  rate: 0.1
+  rate: 0.5
   types:
-    missing_field: 0.3
-    negative_value: 0.2
-    invalid_type: 0.2
-    out_of_order_timestamp: 0.2
+    missing_field: 0.6
+    negative_value: 0.1
+    invalid_type: 0.1
+    out_of_order_timestamp: 0.1
     duplicate_flag: 0.1
 
 technologies:
