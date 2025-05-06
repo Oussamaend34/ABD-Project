@@ -29,12 +29,14 @@ VOICE_SUBJECT = f"{VOICE_TOPIC}-value"
 SMS_SUBJECT = f"{SMS_TOPIC}-value"
 DATA_SUBJECT = f"{DATA_TOPIC}-value"
 TOPIC_OK_SINK = "cdr.ok"
-SUBJECT_SINK = f"{TOPIC_OK_SINK}-value"
+TOPIC_ERROR_SINK = "cdr.error"
+SUBJECT_OK_SINK = f"{TOPIC_OK_SINK}-value"
+SUBJECT_ERROR_SINK = f"{TOPIC_ERROR_SINK}-value"
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
 SCHEMA_REGISTRY_URL = "http://localhost:8081"
 
 # ========== SPARK SESSION ==========
-spark = (
+spark: SparkSession = (
     SparkSession.builder.appName("streaming_mediation_pipeline")
     .config(
         "spark.jars.packages",
@@ -82,7 +84,16 @@ def normalize(df: DataFrame) -> DataFrame:
     Normalize raw CDR/EDR DataFrame to the unified normalized schema.
     """
 
-    optional_fields = ["sender_id", "receiver_id", "user_id", "data_volume_mb"]
+    optional_fields = [
+        "caller_id",
+        "callee_id",
+        "sender_id",
+        "receiver_id",
+        "user_id",
+        "data_volume_mb",
+        "session_duration_sec",
+        "duration_sec",
+    ]
     for field in optional_fields:
         if field not in df.columns:
             df = df.withColumn(field, F.lit(None))
@@ -107,7 +118,7 @@ def normalize(df: DataFrame) -> DataFrame:
         .withColumn(
             "duration_sec",
             when(col("record_type") == "voice", col("duration_sec"))
-            .when(col("record_type") == "data", col("duration_sec"))
+            .when(col("record_type") == "data", col("session_duration_sec"))
             .otherwise(F.lit(None)),
         )
         .withColumn(
@@ -117,6 +128,20 @@ def normalize(df: DataFrame) -> DataFrame:
             ),
         )
         .withColumn("status", F.lit("ok"))
+        .withColumn(
+            "timestamp",
+            when(col("timestamp").isNull(), F.current_timestamp()).otherwise(
+                col("timestamp")
+            ),
+        )
+        .withColumn(
+            "timestamp",
+            when(
+                (col("timestamp") < F.current_timestamp() - F.expr("INTERVAL 5 DAY"))
+                | (col("timestamp") > F.current_timestamp() + F.expr("INTERVAL 5 DAY")),
+                F.current_timestamp(),
+            ).otherwise(col("timestamp")),
+        )
         .select(
             "uuid",
             "record_type",
@@ -211,21 +236,21 @@ voice_kafka_df = (
     spark.readStream.format("kafka")
     .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)
     .option("subscribe", VOICE_TOPIC)
-    .option("startingOffsets", "latest")
+    .option("startingOffsets", "earliest")
     .load()
 )
 sms_kafka_df = (
     spark.readStream.format("kafka")
     .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)
     .option("subscribe", SMS_TOPIC)
-    .option("startingOffsets", "latest")
+    .option("startingOffsets", "earliest")
     .load()
 )
 data_kafka_df = (
     spark.readStream.format("kafka")
     .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)
     .option("subscribe", DATA_TOPIC)
-    .option("startingOffsets", "latest")
+    .option("startingOffsets", "earliest")
     .load()
 )
 
@@ -278,44 +303,53 @@ result_df = result_df.select(
 )
 
 result_df = tag_cdrs(result_df)
-
-
-required_ok_fields = ["msisdn", "cell_id", "technology", "record_type", "timestamp"]
-result_df = result_df.filter(F.col("status") == "ok")
-result_df = result_df.filter(
-    (F.col("status") == "ok")
-    & F.col("msisdn").isNotNull()
-    & F.col("cell_id").isNotNull()
-    & F.col("technology").isNotNull()
-    & F.col("record_type").isNotNull()
-    & F.col("timestamp").isNotNull()
+ok_df = result_df.filter((F.col("status") == "ok") | (F.col("status") == "partial"))
+error_df = result_df.filter(
+    ~((F.col("status") == "ok") | (F.col("status") == "partial"))
 )
-# Optional: verify all required fields are non-null
-for field in required_ok_fields:
-    result_df = result_df.filter(F.col(field).isNotNull())
 # ========== OUTPUT ==========
-latest_version_analyzed_data = get_latest_schema_str(SUBJECT_SINK)
-
-result_df = result_df.select(
+latest_version_analyzed_data = get_latest_schema_str(SUBJECT_OK_SINK)
+ok_df = ok_df.select(
     to_avro(F.struct("*"), latest_version_analyzed_data.schema.schema_str).alias(
         "value"
     ),
 )
+
 magicByteBinary = int_to_binary_udf(F.lit(0), F.lit(1))
-schemaIdBinary = int_to_binary_udf(
+okSchemaIdBinary = int_to_binary_udf(
     F.lit(latest_version_analyzed_data.schema_id), F.lit(4)
 )
-result_df = result_df.withColumn(
-    "value", F.concat(magicByteBinary, schemaIdBinary, col("value"))
+ok_df = ok_df.withColumn(
+    "value", F.concat(magicByteBinary, okSchemaIdBinary, col("value"))
 )
 
+latest_version_error_data = get_latest_schema_str(SUBJECT_ERROR_SINK)
+print("Latest version of error data schema:", latest_version_error_data.schema_id)
+error_df = error_df.select(
+    to_avro(F.struct("*"), latest_version_error_data.schema.schema_str).alias("value")
+)
+errorSchemaIdBinary = int_to_binary_udf(
+    F.lit(latest_version_error_data.schema_id), F.lit(4)
+)
+error_df = error_df.withColumn(
+    "value", F.concat(magicByteBinary, errorSchemaIdBinary, col("value"))
+)
 print("Writing to Kafka topic:", TOPIC_OK_SINK)
 query = (
-    result_df.writeStream.format("kafka")
+    ok_df.writeStream.format("kafka")
     .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)
     .option("topic", TOPIC_OK_SINK)
     .outputMode("append")
-    .option("checkpointLocation", "checkpoint")
+    .option("checkpointLocation", "checkpoints/ok")
     .start()
 )
-query.awaitTermination()
+print("Writing to Kafka topic:", TOPIC_ERROR_SINK)
+query2 = (
+    error_df.writeStream.format("kafka")
+    .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)
+    .option("topic", TOPIC_ERROR_SINK)
+    .outputMode("append")
+    .option("checkpointLocation", "checkpoints/error")
+    .start()
+)
+spark.streams.awaitAnyTermination()
