@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "DataEDR",
-  "namespace": "com.abd.telecom",
+  "namespace": "com.ensah.telecom.events",
   "doc": "Represents a data event detail record (EDR) with relevant information.",
   "fields": [
     {

@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "VoiceCDR",
-  "namespace": "com.ensah.telecom.voice",
+  "namespace": "com.ensah.telecom.events",
   "doc": "Represents a voice call detail record (CDR) with relevant information.",
   "fields": [
     {

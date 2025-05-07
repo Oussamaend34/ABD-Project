@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "SMSCDR",
-  "namespace": "com.abd.telecom",
+  "namespace": "com.ensah.telecom.events",
   "doc": "Represents a short message service (SMS) call detail record (CDR) with relevant information.",
   "fields": [
     {

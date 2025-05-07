@@ -1,7 +1,7 @@
 {
   "type": "record",
-  "name": "NormalizedCDR",
-  "namespace": "com.abd.telecom",
+  "name": "NormalizedErrorCDR",
+  "namespace": "com.ensah.telecom.events",
   "fields": [
     {
       "name": "uuid",
