@@ -15,9 +15,11 @@ admin_client = AdminClient(admin_config)
 voice_cdr_topic = NewTopic("cdr.voice", num_partitions=3, replication_factor=3)  # type: ignore
 sms_cdr_topic = NewTopic("cdr.sms", num_partitions=3, replication_factor=3)  # type: ignore
 data_edr_topic = NewTopic("cdr.data", num_partitions=3, replication_factor=3)  # type: ignore
+ok_cdr_topic = NewTopic("cdr.ok", num_partitions=3, replication_factor=3)  # type: ignore
+error_cdr_topic = NewTopic("cdr.error", num_partitions=3, replication_factor=3)  # type: ignore
 
 topic_results = admin_client.create_topics(  # type: ignore
-    [voice_cdr_topic, sms_cdr_topic, data_edr_topic]
+    [voice_cdr_topic, sms_cdr_topic, data_edr_topic, ok_cdr_topic, error_cdr_topic]
 )
 
 cluster_metadata: ClusterMetadata = admin_client.list_topics()  # type: ignore

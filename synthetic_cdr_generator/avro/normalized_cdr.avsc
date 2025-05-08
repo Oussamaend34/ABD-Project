@@ -1,0 +1,53 @@
+{
+  "type": "record",
+  "name": "NormalizedCDR",
+  "namespace": "com.ensah.telecom.events",
+  "fields": [
+    {
+      "name": "uuid",
+      "type": "string"
+    },
+    {
+      "name": "record_type",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "msisdn",
+      "type": "string"
+    },
+    {
+      "name": "counterparty_msisdn",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "duration_sec",
+      "type": ["null", "int"],
+      "default": null
+    },
+    {
+      "name": "data_volume_mb",
+      "type": ["null", "double"],
+      "default": null
+    },
+    {
+      "name": "cell_id",
+      "type": "string"
+    },
+    {
+      "name": "technology",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    }
+  ]
+}

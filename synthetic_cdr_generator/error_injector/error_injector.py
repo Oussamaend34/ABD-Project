@@ -89,8 +89,8 @@ class ErrorInjector:
                 record[field] = ""
             elif isinstance(record[field], (int, float)):
                 record[field] = -9999
-            else:
-                record[field] = "?"
+            elif isinstance(record[field], datetime):
+                record[field] = datetime(1970, 1, 1, 0, 0, 0)
 
     def _inject_negative_value(self, record: Dict[str, Any]):
         keys = list(record.keys())
