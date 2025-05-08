@@ -1,0 +1,112 @@
+
+services:
+  streaming-mediation-voice-1:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-voice"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.voice"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "voice"
+    restart: unless-stopped
+
+  streaming-mediation-voice-2:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-voice"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.voice"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "voice"
+    restart: unless-stopped
+
+  streaming-mediation-voice-3:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-voice"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.voice"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "voice"
+    restart: unless-stopped
+
+  streaming-mediation-data-1:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-data"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.data"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "data"
+
+  streaming-mediation-data-2:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-data"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.data"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "data"
+
+  streaming-mediation-data-3:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-data"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.data"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "data"
+
+  streaming-mediation-sms:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-sms"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.sms"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "sms"
+
+  streaming-mediation-sms-2:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-sms"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.sms"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "sms"
+
+  streaming-mediation-sms-3:
+    image: oussamaend34/streaming-mediation
+    network_mode: host
+    environment:
+      APPLICATION_ID_CONFIG: "streaming-mediation-sms"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
+      INPUT_TOPIC: "cdr.sms"
+      OK_OUTPUT_TOPIC: "cdr.ok"
+      ERROR_OUTPUT_TOPIC: "cdr.error"
+      CDR_TYPE: "sms"
