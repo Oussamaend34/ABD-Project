@@ -154,7 +154,7 @@ services:
         kafkaConnect:
           enabled: true
           clusters:
-            - name: datawarehouse
+            - name: cdr_sink
               url: http://connect:8083
     ports:
       - 8080:8080

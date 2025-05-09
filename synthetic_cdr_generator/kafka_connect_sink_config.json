@@ -19,9 +19,11 @@
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
     "header.converter": "org.apache.kafka.connect.storage.SimpleHeaderConverter",
     "delete.enabled": false,
+    "error.tolerance": "all",
+    "error.tolerance.deadletterqueue.topic.name": "cdr.ok.dlq",
     "replace.null.with.default": true,
     "trim.sensitive.log": false,
-    "errors.log.enable": false,
-    "errors.log.include.messages": false,
-    "errors.deadletterqueue.context.headers.enable": false
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "errors.deadletterqueue.context.headers.enable": true
 }
