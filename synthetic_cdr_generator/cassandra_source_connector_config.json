@@ -1,0 +1,22 @@
+{
+    "connector.class": "io.lenses.streamreactor.connect.cassandra.source.CassandraSourceConnector",
+    "name": "cassandra-source",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.enhanced.avro.schema.support": "true",
+    "value.converter.schemas.enable": "true",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "header.converter": "org.apache.kafka.connect.storage.SimpleHeaderConverter",
+    "use.latest.version": "true",
+    "connect.cassandra.kcql": "INSERT INTO cdr_raw_2 SELECT * FROM raw_usage_records PK timestamp INCREMENTALMODE=TIMESTAMP WITHKEY(uuid)",
+    "connect.cassandra.contact.points": "cassandra",
+    "connect.cassandra.port": 9042,
+    "connect.cassandra.key.space": "telecom",
+    "connect.cassandra.ssl.enabled": false,
+    "connect.cassandra.ssl.client.cert.auth": false,
+    "connect.cassandra.delete.enabled": false,
+    "errors.log.enable": false,
+    "errors.log.include.messages": false,
+    "errors.deadletterqueue.context.headers.enable": false,
+    "connect.progress.enabled": false
+}

@@ -180,12 +180,25 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - kafka-net
-
+  
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TelecomCluster
+      - CASSANDRA_DC=datacenter1
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - kafka-net
 volumes:
   kafka1-data:
   kafka2-data:
   kafka3-data:
   postgres-data:
+  cassandra_data:
 
 networks:
   kafka-net:
