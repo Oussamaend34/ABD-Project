@@ -1,8 +1,14 @@
 package com.ensah;
 
 
+import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.SchemaMetadata;
+import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.*;
+import org.apache.spark.sql.api.java.UDF2;
+import org.apache.spark.sql.types.DataTypes;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,15 +18,29 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Properties;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.count;
+import static org.apache.spark.sql.avro.functions.to_avro;
+import static org.apache.spark.sql.functions.*;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
 
+    public static UDF2<Integer, Integer, byte[]> intToBinaryUDF = (value, byteSize) -> {
+        if (value == null || byteSize == null) return null;
+
+        // Check max allowed value
+        int max = (int) Math.pow(2, byteSize * 8) - 1;
+        if (value > max) throw new IllegalArgumentException("Value doesn't fit in the byte size");
+
+        byte[] result = new byte[byteSize];
+        for (int i = byteSize - 1; i >= 0; i--) {
+            result[i] = (byte) (value & 0xFF);
+            value >>= 8;
+        }
+        return result;
+    };
+
+    public static void main(String[] args) throws Exception {
         Properties properties = getProperties();
-
         String url = properties.getProperty("url");
         String customersTable = properties.getProperty("customers.table");
         String host = properties.getProperty("cassandra.connection.host");
@@ -28,6 +48,16 @@ public class Main {
         String keyspace = properties.getProperty("cassandra.keyspace");
         String rawUsagesTable = properties.getProperty("cassandra.raw.data.table");
         String dailyUsageTable = properties.getProperty("cassandra.daily.usage.table");
+        String schemaRegistryUrl = properties.getProperty("schema.registry.url");
+        String cdrUnratableTopic = properties.getProperty("cdr.unratable.topic");
+        String cdrUnratableSubject = properties.getProperty("cdr.unratable.subject");
+        String bootstrapServers = properties.getProperty("kafka.bootstrap.servers");
+
+
+        SchemaRegistryClient schemaRegistryClient = new CachedSchemaRegistryClient(schemaRegistryUrl, 100);
+
+        SchemaMetadata schemaMetadata = getSchemaLastVersion(schemaRegistryClient, cdrUnratableSubject);
+
 
         SparkConf conf = new SparkConf()
                 .setAppName("Telecom Data Aggregator")
@@ -36,6 +66,8 @@ public class Main {
                 .set("spark.cassandra.connection.port", port);
 
         SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
+
+        spark.udf().register("int_to_binary_udf", intToBinaryUDF, DataTypes.BinaryType);
 
         Dataset<Row> customersDf = spark.read()
                 .jdbc(url, customersTable, properties);
@@ -46,7 +78,7 @@ public class Main {
                 .option("table", rawUsagesTable)
                 .load();
 
-        LocalDate today = LocalDate.now().minusDays(1);
+        LocalDate today = LocalDate.now().minusDays(2);
         LocalDateTime startOfDay = today.atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
         Timestamp from = Timestamp.from(startOfDay.toInstant(ZoneOffset.UTC));
@@ -90,16 +122,48 @@ public class Main {
                         .notEqual("active")
                         .or(enrichedDf.col("customer_subscription_type").notEqual("postpaid"))
         );
-        System.out.println("Ratable Records Count: " + ratableDf.count());
-        System.out.println("Non-Ratable Records Count: " + nonRatableDf.count());
         ratableDf.printSchema();
-
+        nonRatableDf.printSchema();
         ratableDf.write()
                 .format("org.apache.spark.sql.cassandra")
                 .option("keyspace", keyspace)
                 .option("table", dailyUsageTable)
                 .mode(SaveMode.Append)
                 .save();
+
+        nonRatableDf = nonRatableDf.select(
+                col("customer_id"),
+                col("customer_status"),
+                col("customer_subscription_type"),
+                col("msisdn"),
+                col("record_type"),
+                col("count"),
+                col("total_duration"),
+                col("total_data_volume"),
+                col("usage_date")
+        );
+
+        nonRatableDf = nonRatableDf
+                .select(
+                        col("customer_id").cast("string").as("key"),
+                        to_avro(struct("*"), schemaMetadata.getSchema()).as("value")
+                );
+
+        Column magicByte = callUDF("int_to_binary_udf", lit(0), lit(1));
+        Column schemaId = callUDF("int_to_binary_udf", lit(schemaMetadata.getId()), lit(4));
+        nonRatableDf = nonRatableDf.withColumn("value", concat(magicByte, schemaId, col("value")));
+//        nonRatableDf = nonRatableDf.selectExpr("CAST(key AS STRING) AS key", "CAST(value AS BINARY) AS value");
+        nonRatableDf.write()
+                .format("kafka")
+                .option("kafka.bootstrap.servers", bootstrapServers)
+                .option("topic", cdrUnratableTopic)
+                .save();
+    }
+
+    private static SchemaMetadata getSchemaLastVersion(SchemaRegistryClient schemaRegistryClient, String subject) throws RestClientException, IOException {
+        SchemaMetadata schemaById = schemaRegistryClient.getLatestSchemaMetadata(subject);
+        System.out.println(schemaById.getSchema());
+        return schemaById;
     }
 
     public static Properties getProperties() throws IOException {

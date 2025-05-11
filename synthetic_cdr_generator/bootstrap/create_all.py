@@ -25,7 +25,7 @@ voice_cdr_topic = NewTopic("cdr.voice", num_partitions=3, replication_factor=3) 
 sms_cdr_topic = NewTopic("cdr.sms", num_partitions=3, replication_factor=3)  # type: ignore
 data_edr_topic = NewTopic("cdr.data", num_partitions=3, replication_factor=3)  # type: ignore
 ok_cdr_topic = NewTopic("cdr.ok", num_partitions=3, replication_factor=3)  # type: ignore
-error_cdr_topic = NewTopic("cdr.error", num_partitions=3, replication_factor=3)  # type: ignore
+error_cdr_topic = NewTopic("cdr.error", num_partitions=3, replication_factor=3)  # type: ignoreclear
 
 topic_results = admin_client.create_topics(
     [voice_cdr_topic, sms_cdr_topic, data_edr_topic, ok_cdr_topic, error_cdr_topic]
@@ -46,11 +46,15 @@ with open("avro/normalized_cdr.avsc", "r", encoding="utf-8") as f:
 with open("avro/normalized_cdr_error.avsc", "r", encoding="utf-8") as f:
     error_cdr_schema = f.read()
 
+with open("avro/unratable_cdr.avsc", "r", encoding="utf-8") as f:
+    unratable_cdr_schema = f.read()
+
 cdr_voice_schema = Schema(voice_cdr_schema, "AVRO")
 cdr_sms_schema = Schema(sms_cdr_schema, "AVRO")
 cdr_data_schema = Schema(data_edr_schema, "AVRO")
 cdr_ok_schema = Schema(ok_cdr_schema, "AVRO")
 cdr_error_schema = Schema(error_cdr_schema, "AVRO")
+cdr_unratable_schema = Schema(unratable_cdr_schema, "AVRO")
 
 print("Registering schemas...")
 print("Registering voice CDR schema...")
@@ -63,6 +67,8 @@ print("Registering ok CDR schema...")
 ok_scehma_id = sr_client.register_schema("cdr.ok-value", cdr_ok_schema)
 print("Registering error CDR schema...")
 error_scehma_id = sr_client.register_schema("cdr.error-value", cdr_error_schema)
+print("Registering unratable CDR schema...")
+unratable_scehma_id = sr_client.register_schema("cdr.unratable-value", cdr_unratable_schema)
 print("Schemas registered successfully.")
 
 cluster_metadata: ClusterMetadata = admin_client.list_topics()  # type: ignore
@@ -83,3 +89,4 @@ print(f"SMS CDR schema ID: {sms_scehma_id}")
 print(f"Data CDR schema ID: {data_scehma_id}")
 print(f"OK CDR schema ID: {ok_scehma_id}")
 print(f"Error CDR schema ID: {error_scehma_id}")
+print(f"Unratable CDR schema ID: {unratable_scehma_id}")
