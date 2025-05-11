@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
@@ -77,6 +78,11 @@ public class Main {
                             String cellId = value.get("cell_id").toString();
                             String technology = value.get("technology").toString();
                             Instant timestamp = Instant.ofEpochMilli((Long) value.get("timestamp"));
+                            if (
+                                    timestamp.isBefore(Instant.now().minus(1, ChronoUnit.DAYS)) || timestamp.isAfter(Instant.now().plus(1, ChronoUnit.DAYS))
+                            ){
+                                timestamp = Instant.now();
+                            }
                             if (record_type == null) {
                                 record_type = cdrType;
                             }
