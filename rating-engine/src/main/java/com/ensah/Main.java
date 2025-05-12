@@ -76,7 +76,9 @@ public class Main {
                 .format("org.apache.spark.sql.cassandra")
                 .option("keyspace", keyspace)
                 .option("table", rawUsagesTable)
-                .load();
+                .load()
+                .distinct();
+
 
         LocalDate today = LocalDate.now().minusDays(2);
         LocalDateTime startOfDay = today.atStartOfDay();
