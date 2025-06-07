@@ -1,0 +1,22 @@
+{
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "name": "mongodb-sink",
+    "topics": "cdr.ok",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.enhanced.avro.schema.support": "true",
+    "value.converter.schemas.enable": "true",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "header.converter": "org.apache.kafka.connect.storage.SimpleHeaderConverter",
+    "use.latest.version": "true",
+    "connection.uri": "mongodb://root:password@mongodb:27017/mydb?authSource=admin",
+    "database": "mydb",
+    "collection": "cdr.ok",
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "mongodb-sink-dlq",
+    "errors.deadletterqueue.topic.replication.factor":"1",
+    "errors.deadletterqueue.context.headers.enable": "true",
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "connect.progress.enabled": false
+}
