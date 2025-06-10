@@ -48,7 +48,6 @@ public class Main {
 
         SparkConf conf = new SparkConf()
                 .setAppName("Telecom Data Aggregator")
-                .setMaster("local[*]")
                 .set("spark.cassandra.connection.host", host)
                 .set("spark.cassandra.connection.port", port);
 
@@ -107,20 +106,20 @@ public class Main {
         tieredOnly = tieredOnly.withColumn(
                 "tier_cost",
                 when(
-                        col("record_type").equalTo("voice").and(col("max_units").isNull()).and(col("total_data_volume").gt(col("min_units"))),
+                        col("record_type").equalTo("voice").and(col("max_units").isNull()).and(col("total_duration").gt(col("min_units"))),
                         col("total_duration").minus(col("min_units")).multiply(col("tier_unit_price"))
                 ).otherwise(lit(0)));
         tieredOnly = tieredOnly.withColumn(
                 "tier_cost",
                 when(
                         col("record_type").equalTo("voice").and(col("total_duration").between(col("min_units"), col("max_units"))),
-                        col("total_duration").minus(col("min_units").multiply(col("tier_unit_price")))
+                        col("total_duration").minus(col("min_units")).multiply(col("tier_unit_price"))
                 ).otherwise(col("tier_cost")));
         tieredOnly = tieredOnly.withColumn(
                 "tier_cost",
                 when(
                         col("record_type").equalTo("voice").and(col("total_duration").gt(col("max_units"))),
-                        col("max_units").minus(col("min_units").multiply(col("tier_unit_price")))
+                        col("max_units").minus(col("min_units")).multiply(col("tier_unit_price"))
                 ).otherwise(col("tier_cost")));
         tieredOnly = tieredOnly.withColumn(
                 "tier_cost",
@@ -152,10 +151,12 @@ public class Main {
                         col("record_type").equalTo("data").and(col("total_data_volume").lt(col("min_units"))),
                         0
                 ).otherwise(col("tier_cost")));
+
         Dataset<Row> tieredOnlyWithCost = tieredOnly.groupBy(col("customer_id"), col("record_type")).agg(
                 functions.sum(col("tier_cost")).alias("base_cost")
         ).as("tiered_only_with_cost").join(enriched.as("enriched"), col("tiered_only_with_cost.customer_id").equalTo(col("enriched.customer_id"))
                 .and(col("tiered_only_with_cost.record_type").equalTo(col("enriched.record_type"))));
+
         withCost = withCost.select(
                 col("customer_id"),
                 col("record_type"),
@@ -169,7 +170,6 @@ public class Main {
                 col("activation_date"),
                 col("status"),
                 col("subscription_type"),
-                col("region"),
                 col("base_cost")
         );
 
@@ -186,7 +186,6 @@ public class Main {
                 col("activation_date"),
                 col("status"),
                 col("subscription_type"),
-                col("region"),
                 col("base_cost")
         );
         Dataset<Row> finalDf = withCost.unionByName(tieredOnlyWithCost).withColumn("billing_month", lit(billingMonth));

@@ -11,6 +11,7 @@ from confluent_kafka.schema_registry import SchemaRegistryClient
 
 from utils import (
     init_pool,
+    load_caller_profiles,
     load_geography,
     load_config,
     load_generator_config,
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     PRODUCER = Producer(PRODUCER_CONFIG)
 
     RECORDS_PER_HOUR = GENERATOR_CONFIG["records_per_hour"]
-    POOL_SIZE = GENERATOR_CONFIG["pool_size"]
+    CUSTOMER_CSV_FILE = GENERATOR_CONFIG["customer_csv_file"]
     SEED = GENERATOR_CONFIG["seed"]
     VOICE_TOPIC = TOPICS["voice"]
     VOICE_SUBJECT = SUBJECTS["voice"]
@@ -56,7 +57,7 @@ if __name__ == "__main__":
     ERROR_TYPES = ERROR_CONFIG["types"]
     CDR_DISTRIBUTION = GENERATOR_CONFIG["distribution"]
 
-    msisdn_pool = init_pool(pool_size=POOL_SIZE, cities=CITIES_DATA)
+    msisdn_pool = load_caller_profiles(CUSTOMER_CSV_FILE)
 
     voice_generator = VoiceCDRGenerator(
         caller_pool=msisdn_pool, cities_data=CITIES_DATA, technologies=TECHNOLOGIES

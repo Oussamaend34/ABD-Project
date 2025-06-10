@@ -157,7 +157,7 @@ services:
             - name: cdr_sink
               url: http://connect:8083
     ports:
-      - 8080:8080
+      - 8082:8080
     depends_on:
       - kafka-1
       - kafka-2
@@ -166,7 +166,46 @@ services:
       - connect
     networks:
       - kafka-net
-  
+
+  spark-master:
+    image: bitnami/spark:latest
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+    volumes:
+      - ./jars:/home/spark/jars
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    networks:
+      - kafka-net
+
+  spark-worker-1:
+    image: bitnami/spark:latest
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./jars:/home/spark/jars
+    ports:
+      - "8084:8081"
+    networks:
+      - kafka-net
+
+  spark-worker-2:
+    image: bitnami/spark:latest
+    container_name: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./jars:/home/spark/jars
+    networks:
+      - kafka-net
+
   postgres:
     image: postgres:latest
     container_name: postgres

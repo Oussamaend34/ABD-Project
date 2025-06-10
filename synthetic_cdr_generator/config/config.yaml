@@ -19,7 +19,7 @@ subjects:
   data: "cdr.data-value"
 
 generation:
-  pool_size: 1000
+  customer_csv_file: "utils/customer_data.csv"
   seed: 
   records_per_hour: 7200
   distribution:

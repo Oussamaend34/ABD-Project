@@ -1,10 +1,6 @@
 package com.ensah;
 
 
-import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.SchemaMetadata;
-import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.api.java.UDF2;
@@ -43,27 +39,24 @@ public class Main {
         Properties properties = getProperties();
         String url = properties.getProperty("url");
         String customersTable = properties.getProperty("customers.table");
-        String host = properties.getProperty("cassandra.connection.host");
-        String port = properties.getProperty("cassandra.connection.port");
-        String keyspace = properties.getProperty("cassandra.keyspace");
-        String rawUsagesTable = properties.getProperty("cassandra.raw.data.table");
-        String dailyUsageTable = properties.getProperty("cassandra.daily.usage.table");
+        String mongoUri = properties.getProperty("mongodb.uri");
+        String mongoDatabase = properties.getProperty("mongodb.database");
+        String rawCollection = properties.getProperty("mongodb.raw.collection");
+        String dailyUsageSummaryCollection = properties.getProperty("mongodb.dail-usage.collection");
         String schemaRegistryUrl = properties.getProperty("schema.registry.url");
         String cdrUnratableTopic = properties.getProperty("cdr.unratable.topic");
         String cdrUnratableSubject = properties.getProperty("cdr.unratable.subject");
         String bootstrapServers = properties.getProperty("kafka.bootstrap.servers");
-
-
-        SchemaRegistryClient schemaRegistryClient = new CachedSchemaRegistryClient(schemaRegistryUrl, 100);
-
-        SchemaMetadata schemaMetadata = getSchemaLastVersion(schemaRegistryClient, cdrUnratableSubject);
+        String schema = "{\"type\":\"record\",\"name\":\"UnratableCDR\",\"namespace\":\"com.ensah.telecom.events\",\"fields\":[{\"name\":\"customer_id\",\"type\":\"long\"},{\"name\":\"customer_status\",\"type\":\"string\"},{\"name\":\"customer_subscription_type\",\"type\":\"string\"},{\"name\":\"msisdn\",\"type\":\"string\"},{\"name\":\"record_type\",\"type\":\"string\"},{\"name\":\"count\",\"type\":\"long\"},{\"name\":\"total_duration\",\"type\":[\"null\",\"long\"],\"default\":null},{\"name\":\"total_data_volume\",\"type\":[\"null\",\"double\"],\"default\":null},{\"name\":\"usage_date\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}}]}";
+        Integer schemaId = 6;
 
 
         SparkConf conf = new SparkConf()
                 .setAppName("Telecom Data Aggregator")
-                .setMaster("local[*]")
-                .set("spark.cassandra.connection.host", host)
-                .set("spark.cassandra.connection.port", port);
+//                .setMaster("local[*]")
+                .set("spark.mongodb.read.connection.uri", mongoUri)
+                .set("spark.mongodb.read.database", mongoDatabase)
+                .set("spark.mongodb.read.collection", rawCollection);
 
         SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
 
@@ -73,27 +66,29 @@ public class Main {
                 .jdbc(url, customersTable, properties);
 
         Dataset<Row> raw_usage = spark.read()
-                .format("org.apache.spark.sql.cassandra")
-                .option("keyspace", keyspace)
-                .option("table", rawUsagesTable)
-                .load()
-                .distinct();
+                .format("mongodb")
+                .option("spark.mongodb.read.connection.uri", mongoUri)
+                .option("spark.mongodb.read.database", mongoDatabase)
+                .option("spark.mongodb.read.collection", rawCollection)
+                .load();
+        raw_usage = raw_usage.drop(col("_id"));
 
 
-        LocalDate today = LocalDate.now().minusDays(2);
+        LocalDate today = LocalDate.now();
         LocalDateTime startOfDay = today.atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
         Timestamp from = Timestamp.from(startOfDay.toInstant(ZoneOffset.UTC));
         Timestamp to = Timestamp.from(endOfDay.toInstant(ZoneOffset.UTC));
-
+        System.out.println("Total records in raw_usage: " + raw_usage.count());
         Dataset<Row> filteredDf = raw_usage.filter(raw_usage.col("timestamp").between(from, to)).withColumn("usage_date", functions.to_date(col("timestamp")));
+        System.out.println("Filtered records count: " + filteredDf.count());
         Dataset<Row> aggregatedDf = filteredDf.groupBy(col("msisdn"), col("record_type"), col("usage_date"))
                 .agg(
                         count("*").alias("count"),
                         functions.sum(col("duration_sec")).alias("total_duration"),
                         functions.sum(col("data_volume_mb")).alias("total_data_volume")
                 );
-
+        System.out.println("Aggregated records count: " + aggregatedDf.count());
         Dataset<Row> enrichedDf = aggregatedDf.as("aggregated").join(customersDf.as("customers"), col("aggregated.msisdn").equalTo(col("customers.msisdn")))
                         .select(
                                 col("customers.id").as("customer_id"),
@@ -106,7 +101,7 @@ public class Main {
                                 col("aggregated.total_data_volume").as("total_data_volume"),
                                 col("aggregated.usage_date")
                         );
-
+        System.out.println("Enriched records count: " + enrichedDf.count());
         Dataset<Row> ratableDf = enrichedDf.filter(enrichedDf.col("customer_status")
                 .equalTo("active")
                 .and(enrichedDf.col("customer_subscription_type").equalTo("postpaid")))
@@ -119,17 +114,18 @@ public class Main {
                         col("total_data_volume"),
                         col("usage_date")
                 );
+        System.out.println("Ratable records count: " + ratableDf.count());
         Dataset<Row> nonRatableDf = enrichedDf.filter(
                 enrichedDf.col("customer_status")
                         .notEqual("active")
                         .or(enrichedDf.col("customer_subscription_type").notEqual("postpaid"))
         );
-        ratableDf.printSchema();
-        nonRatableDf.printSchema();
+        System.out.println("Non-ratable records count: " + nonRatableDf.count());
         ratableDf.write()
-                .format("org.apache.spark.sql.cassandra")
-                .option("keyspace", keyspace)
-                .option("table", dailyUsageTable)
+                .format("mongodb")
+                .option("spark.mongodb.write.connection.uri", mongoUri)
+                .option("spark.mongodb.write.database", mongoDatabase)
+                .option("spark.mongodb.write.collection", dailyUsageSummaryCollection)
                 .mode(SaveMode.Append)
                 .save();
 
@@ -148,24 +144,18 @@ public class Main {
         nonRatableDf = nonRatableDf
                 .select(
                         col("customer_id").cast("string").as("key"),
-                        to_avro(struct("*"), schemaMetadata.getSchema()).as("value")
+                        to_avro(struct("*"), schema).as("value")
                 );
 
         Column magicByte = callUDF("int_to_binary_udf", lit(0), lit(1));
-        Column schemaId = callUDF("int_to_binary_udf", lit(schemaMetadata.getId()), lit(4));
-        nonRatableDf = nonRatableDf.withColumn("value", concat(magicByte, schemaId, col("value")));
+        Column schemaIdColumn = callUDF("int_to_binary_udf", lit(schemaId), lit(4));
+        nonRatableDf = nonRatableDf.withColumn("value", concat(magicByte, schemaIdColumn, col("value")));
 //        nonRatableDf = nonRatableDf.selectExpr("CAST(key AS STRING) AS key", "CAST(value AS BINARY) AS value");
         nonRatableDf.write()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", bootstrapServers)
                 .option("topic", cdrUnratableTopic)
                 .save();
-    }
-
-    private static SchemaMetadata getSchemaLastVersion(SchemaRegistryClient schemaRegistryClient, String subject) throws RestClientException, IOException {
-        SchemaMetadata schemaById = schemaRegistryClient.getLatestSchemaMetadata(subject);
-        System.out.println(schemaById.getSchema());
-        return schemaById;
     }
 
     public static Properties getProperties() throws IOException {

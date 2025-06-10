@@ -5,6 +5,7 @@ This module contains helper functions for the synthetic CDR generator.
 from typing import List, Optional, Dict, Tuple
 import random
 import json
+import csv
 
 import numpy as np
 
@@ -87,6 +88,18 @@ def init_pool(
         pool.append(caller_profile)
     return pool
 
+def load_caller_profiles(csv_file_path: str) -> list[CallerProfile]:
+    caller_profiles = []
+    with open(csv_file_path, mode='r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            profile = CallerProfile(
+                msisdn=row['msisdn'],
+                home_city=row['home_city_name'],
+                home_region=row['home_region_name']
+            )
+            caller_profiles.append(profile)
+    return caller_profiles
 
 def get_random_caller(pool: List[CallerProfile]) -> CallerProfile:
     """

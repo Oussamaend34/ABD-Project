@@ -15,7 +15,22 @@ def main():
         print(f"❌ An error occurred while setting up Kafka topics and schemas: {e}")
     try:
         print("Registering the MongoDB sink connector...")
-        register_connector()
+        register_connector(connector_config_json_path="mongodb_sink_connector_configuration.json")
+    except Exception as e:
+        print(f"❌ An error occurred while registering the connector: {e}")
+    try:
+        print("Registering the cdr ok jdbc sink connector...")
+        register_connector(connector_config_json_path="cdr-ok-sink-connector.json")
+    except Exception as e:
+        print(f"❌ An error occurred while registering the connector: {e}")
+    try:
+        print("Registering the cdr error jdbc sink connector...")
+        register_connector(connector_config_json_path="cdr-error-sink-connector.json")
+    except Exception as e:
+        print(f"❌ An error occurred while registering the connector: {e}")
+    try:
+        print("Registering the database jdbc source connector...")
+        register_connector(connector_config_json_path="jdbc-source-connector-config.json")
     except Exception as e:
         print(f"❌ An error occurred while registering the connector: {e}")
     try:
