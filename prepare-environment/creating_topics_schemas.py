@@ -24,6 +24,7 @@ def setup_kafka_topics_and_schemas(
         NewTopic("cdr.ok", num_partitions=3, replication_factor=1),
         NewTopic("cdr.error", num_partitions=3, replication_factor=1),
         NewTopic("cdr.unratable", num_partitions=3, replication_factor=1),
+        NewTopic("telecom.billing.invoice", num_partitions=3, replication_factor=1),
     ]
 
     print("Creating topics...")
@@ -37,6 +38,7 @@ def setup_kafka_topics_and_schemas(
         "cdr.ok": "normalized_cdr.avsc",
         "cdr.error": "normalized_cdr_error.avsc",
         "cdr.unratable": "unratable_cdr.avsc",
+        "telecom.billing.invoice": "invoice.avsc",
     }
 
     schema_ids = {}

@@ -136,6 +136,17 @@ services:
     networks:
       - kafka-net
 
+  cron: 
+    image: custom-spark
+    container_name: cron
+    environment:
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./jars:/home/spark/jars
+    networks:
+      - kafka-net
+    
+
   postgres:
     image: postgres:latest
     container_name: postgres
@@ -261,6 +272,7 @@ services:
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
       dw: {condition: service_healthy}
+      prepare-env: {condition: service_completed_successfully}
 
 
 
@@ -283,6 +295,7 @@ services:
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
       dw: {condition: service_healthy}
+      prepare-env: {condition: service_completed_successfully}
 
   streaming-mediation-sms:
     image: oussamaend34/streaming-mediation
@@ -303,6 +316,7 @@ services:
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
       dw: {condition: service_healthy}
+      prepare-env: {condition: service_completed_successfully}
     
   prepare-env:
     image: prepare-env
@@ -315,6 +329,13 @@ services:
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
       dw: {condition: service_healthy}
+
+  data-generator:
+    image: cdr-generator
+    container_name: data-generator
+    network_mode: host
+    depends_on:
+      prepare-env: {condition: service_completed_successfully}
 
 
 volumes:

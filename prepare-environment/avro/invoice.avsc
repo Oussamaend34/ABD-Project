@@ -1,0 +1,66 @@
+{
+  "type": "record",
+  "name": "MonthlyInvoice",
+  "namespace": "com.ensah.telecom.events",
+  "fields": [
+    { 
+      "name": "customer_id",
+      "type": "long"
+    },
+    { 
+      "name": "billing_month", 
+      "type": "string"
+    },
+    { 
+      "name": "first_name",
+      "type": "string"
+    },
+    { 
+      "name": "last_name",
+      "type": "string"
+    },
+    { 
+      "name": "email", 
+      "type": "string"
+    },
+    { 
+      "name": "msisdn", 
+      "type": "string"
+    },
+    { 
+      "name": "subscription_type", 
+      "type": "string"
+    },
+    { 
+      "name": "status", 
+      "type": "string"
+    },
+    {
+      "name": "activation_date",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    { 
+      "name": "voice_cost",
+      "type": "double" 
+    },
+    { 
+      "name": "sms_cost",
+      "type": "double" 
+      },
+    { 
+      "name": "data_cost", 
+      "type": "double" 
+    },
+    { 
+      "name": "total_base_cost", 
+      "type": "double" 
+    },
+    { 
+      "name": "full_name", 
+      "type": "string" 
+    }
+  ]
+}

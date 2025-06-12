@@ -39,17 +39,19 @@ public class Main {
         String productRatesTable = properties.getProperty("product.rates.table");
         String productsTable = properties.getProperty("products.table");
         String rateTiersTable = properties.getProperty("rate.tiers.table");
-        String host = properties.getProperty("cassandra.connection.host");
-        String port = properties.getProperty("cassandra.connection.port");
-        String keyspace = properties.getProperty("cassandra.keyspace");
-        String dailyUsageTable = properties.getProperty("cassandra.daily.usage.table");
-        String monthlyBillingResultTable = properties.getProperty("cassandra.monthly.billing.result.table");
+        String mongoUri = properties.getProperty("mongodb.uri");
+        String mongoDatabase = properties.getProperty("mongodb.database");
+        String dailyUsageSummaryCollection = properties.getProperty("mongodb.dail-usage.collection");
+        String monthlyUsageSummaryCollection = properties.getProperty("mongodb.monthly-usage.collection");
+
 
 
         SparkConf conf = new SparkConf()
-                .setAppName("Telecom Data Aggregator")
-                .set("spark.cassandra.connection.host", host)
-                .set("spark.cassandra.connection.port", port);
+                .setAppName("Monthly Rating Engine")
+//                .setMaster("local[*]")
+                .set("spark.mongodb.read.connection.uri", mongoUri)
+                .set("spark.mongodb.read.database", mongoDatabase)
+                .set("spark.mongodb.read.collection", dailyUsageSummaryCollection);
 
         SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
 
@@ -65,11 +67,13 @@ public class Main {
                 .jdbc(url, rateTiersTable, properties);
 
         Dataset<Row> daily_usage_summary = spark.read()
-                .format("org.apache.spark.sql.cassandra")
-                .option("keyspace", keyspace)
-                .option("table", dailyUsageTable)
+                .format("mongodb")
+                .option("spark.mongodb.read.connection.uri", mongoUri)
+                .option("spark.mongodb.read.database", mongoDatabase)
+                .option("spark.mongodb.read.collection", dailyUsageSummaryCollection)
                 .load();
 
+        daily_usage_summary = daily_usage_summary.drop("_id");
         Date firstDayOfMonth = Date.valueOf(LocalDate.now().withDayOfMonth(1));
         Date lastDayOfMonth = Date.valueOf(LocalDate.now().plusMonths(1).withDayOfMonth(1));
         String billingMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
@@ -191,10 +195,13 @@ public class Main {
         Dataset<Row> finalDf = withCost.unionByName(tieredOnlyWithCost).withColumn("billing_month", lit(billingMonth));
         finalDf.write()
                 .format("org.apache.spark.sql.cassandra")
-                .option("keyspace", keyspace)
-                .option("table", monthlyBillingResultTable)
+                .format("mongodb")
+                .option("spark.mongodb.write.connection.uri", mongoUri)
+                .option("spark.mongodb.write.database", mongoDatabase)
+                .option("spark.mongodb.write.collection", monthlyUsageSummaryCollection)
                 .mode(SaveMode.Append)
                 .save();
+
     }
 
 

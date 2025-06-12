@@ -34,6 +34,11 @@ def main():
     except Exception as e:
         print(f"❌ An error occurred while registering the connector: {e}")
     try:
+        print("Registering the database jdbc sink connector...")
+        register_connector(connector_config_json_path="jdbc-sink-connector-config.json")
+    except Exception as e:
+        print(f"❌ An error occurred while registering the connector: {e}")
+    try:
         print("Populating the database from CSV and JSON files...")
         populate_database_from_csv_and_json()
     except Exception as e:
