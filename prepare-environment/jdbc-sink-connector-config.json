@@ -1,6 +1,6 @@
 {
     "name": "jdbcSinkConnector",
-    "connector.class": "io.confluent.connect.jdbc.JdbcSicleankConnector",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry:8081",
     "value.converter.enhanced.avro.schema.support": "true",

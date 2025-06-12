@@ -72,8 +72,8 @@ def populate_database_from_csv_and_json(
             for city_key, city_info in city_id_map.items():
                 for i in range(1, city_info["max_cell_id"] + 1):
                     cell_name = f"{city_info['pretty_name']}_{i}"
-                    lat = round(faker.latitude(), 6)
-                    lon = round(faker.longitude(), 6)
+                    lat = round(random.uniform(27.0, 36.0), 6)
+                    lon = round(random.uniform(-13.0, -1.0), 6)
                     cur.execute(
                         "INSERT INTO cells (name, city_id, latitude, longitude) VALUES (%s, %s, %s, %s)",
                         (cell_name, city_info["id"], lat, lon),
