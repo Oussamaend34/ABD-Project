@@ -58,7 +58,7 @@ services:
     depends_on:
       kafka: {condition: service_healthy}
       schema-registry: {condition: service_started}
-    healthcheck: {test: curl -f http://localhost:8083, interval: 10s, timeout: 5s, retries: 5}
+    healthcheck: {test: curl -f http://localhost:8083, interval: 10s, timeout: 5s, retries: 10}
     networks:
       - kafka-net
 
@@ -78,7 +78,7 @@ services:
       test: curl -f http://schema-registry:8081/subjects || exit 1
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
     networks:
       - kafka-net
 
@@ -100,7 +100,7 @@ services:
             - name: cdr_sink
               url: http://connect:8083
     ports:
-      - 9000:8080
+      - 9001:8080
     depends_on:
       kafka: {condition: service_healthy}
       schema-registry: {condition: service_healthy}
@@ -108,44 +108,33 @@ services:
     networks:
       - kafka-net
 
-  spark-master:
-    image: bitnami/spark:3.1
-    container_name: spark-master
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-    volumes:
-      - ./jars:/home/spark/jars
-    ports:
-      - "7077:7077"
-      - "8080:8080"
-    networks:
-      - kafka-net
+  # spark-master:
+  #   image: bitnami/spark:3.1
+  #   container_name: spark-master
+  #   environment:
+  #     - SPARK_MODE=master
+  #     - SPARK_RPC_AUTHENTICATION_ENABLED=no
+  #     - SPARK_RPC_ENCRYPTION_ENABLED=no
+  #   volumes:
+  #     - ./jars:/home/spark/jars
+  #   ports:
+  #     - "7077:7077"
+  #     - "8080:8080"
+  #   networks:
+  #     - kafka-net
 
-  spark-worker-1:
-    image: bitnami/spark:3.1
-    container_name: spark-worker-1
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-    volumes:
-      - ./jars:/home/spark/jars
-    ports:
-      - "8084:8081"
-    networks:
-      - kafka-net
-
-  cron: 
-    image: custom-spark
-    container_name: cron
-    environment:
-      - SPARK_MASTER_URL=spark://spark-master:7077
-    volumes:
-      - ./jars:/home/spark/jars
-    networks:
-      - kafka-net
-    
+  # spark-worker-1:
+  #   image: bitnami/spark:3.1
+  #   container_name: spark-worker-1
+  #   environment:
+  #     - SPARK_MODE=worker
+  #     - SPARK_MASTER_URL=spark://spark-master:7077
+  #   volumes:
+  #     - ./jars:/home/spark/jars
+  #   ports:
+  #     - "8084:8081"
+  #   networks:
+  #     - kafka-net
 
   postgres:
     image: postgres:latest
@@ -210,6 +199,87 @@ services:
       retries: 5
       start_period: 10s
 
+
+  pinot-zookeeper:
+    image: zookeeper:3.9.2
+    container_name: "pinot-zookeeper"
+    restart: unless-stopped
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+  pinot-controller:
+    image: apachepinot/pinot:1.2.0
+    command: "StartController -zkAddress pinot-zookeeper:2181"
+    container_name: "pinot-controller"
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms1G -Xmx4G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-controller.log"
+    depends_on:
+      pinot-zookeeper:
+        condition: service_healthy
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  pinot-broker:
+    image: apachepinot/pinot:1.2.0
+    command: "StartBroker -zkAddress pinot-zookeeper:2181"
+    container_name: "pinot-broker"
+    restart: unless-stopped
+    ports:
+      - "8099:8099"
+    environment:
+      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms4G -Xmx4G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-broker.log"
+    depends_on:
+      pinot-controller:
+        condition: service_healthy
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8099/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  pinot-server:
+    image: apachepinot/pinot:1.2.0
+    command: "StartServer -zkAddress pinot-zookeeper:2181"
+    container_name: "pinot-server"
+    restart: unless-stopped
+    ports:
+      - "8098:8098"
+    environment:
+      JAVA_OPTS: "-Dplugins.dir=/opt/pinot/plugins -Xms4G -Xmx16G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xloggc:gc-pinot-server.log"
+    depends_on:
+      pinot-broker:
+        condition: service_healthy
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8097/health/readiness || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
   superset:
     image: apachesuperset.docker.scarf.sh/apache/superset:latest-dev
     container_name: superset
@@ -224,10 +294,12 @@ services:
 
     command: >
       /bin/bash -c "
+        pip install --no-cache-dir pinotdb &&
         superset db upgrade &&
         superset fab create-admin --username admin --firstname Admin --lastname User --email admin@superset.com --password admin &&
         superset init &&
         superset import-dashboards --path /home/superset_bootstrap/dashboard.zip -u admin &&
+        superset import-dashboards --path /home/superset_bootstrap/dashboard1.zip -u admin &&
         superset run -h 0.0.0.0 -p 8088 --with-threads --reload --debug
       "
     networks:

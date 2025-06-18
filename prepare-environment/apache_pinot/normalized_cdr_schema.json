@@ -1,0 +1,24 @@
+{
+  "schemaName": "normalized_cdr",
+  "dimensionFieldSpecs": [
+    { "name": "uuid", "dataType": "STRING" },
+    { "name": "record_type", "dataType": "STRING" },
+    { "name": "msisdn", "dataType": "STRING" },
+    { "name": "counterparty_msisdn", "dataType": "STRING" },
+    { "name": "cell_id", "dataType": "STRING" },
+    { "name": "technology", "dataType": "STRING" },
+    { "name": "status", "dataType": "STRING" }
+  ],
+  "metricFieldSpecs": [
+    { "name": "duration_sec", "dataType": "INT" },
+    { "name": "data_volume_mb", "dataType": "DOUBLE" }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "timestamp",
+      "dataType": "LONG",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}
