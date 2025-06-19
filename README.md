@@ -1,6 +1,28 @@
 # ABD-Project
 
+<p align="center">
+  <img src="./Global Architecture.svg" alt="Global Architecture Diagram" width="800"/>
+</p>
+
 A modular, end-to-end telecom data processing platform for generating, ingesting, normalizing, rating, and analyzing synthetic Call/Data Records (CDRs/EDRs) using modern streaming and batch technologies.
+
+---
+
+## ⚡️ Before You Start
+
+To run the application, make sure you:
+
+1. **Enter the `docker` folder**:
+   ```bash
+   cd docker
+   ```
+2. **Download the JDBC Connector from Confluent Hub**  
+   [JDBC Connector Download & Instructions](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+
+3. **Download the MongoDB Connector from Confluent Hub**  
+   [MongoDB Connector Download & Instructions](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+
+4. **Put the downloaded connectors in the `docker/plugins` folder**
 
 ---
 
@@ -9,13 +31,14 @@ A modular, end-to-end telecom data processing platform for generating, ingesting
 This project simulates a real-world telecom data pipeline, including:
 
 - **Synthetic CDR/EDR Generation** (Python)
-- **Kafka-based Streaming Mediation** (Java, Spark, Kafka Streams, Python)
+- **Streaming Mediation** (Kafka Streams in Java, or Spark Streaming in Python as a variant)
 - **Rating Engines** (Java, Spark)
-- **Data Storage** (Cassandra, Pinot, MongoDB, JDBC)
+- **Billing Engine** (Java, Spark)
+- **Data Storage** (Pinot, MongoDB, PostgreSQL)
 - **Visualization** (Apache Superset)
 - **Containerized Orchestration** (Docker Compose)
 
-See `Gloabl Architecture.pdf` for a detailed architecture diagram.
+See the architecture diagram above or `Gloabl Architecture.pdf` for more details.
 
 ---
 
@@ -24,29 +47,23 @@ See `Gloabl Architecture.pdf` for a detailed architecture diagram.
 - **1-synthetic_cdr_generator/**  
   Generate realistic synthetic CDR/EDR data and push to Kafka. Includes error injection, Avro schema support, and flexible configuration.
 
-- **streaming_mediation_kafka_streams/**  
-  Java-based Kafka Streams app for CDR normalization, deduplication, and error handling.
+- **2-streaming_mediation_kafka_streams/**  
+  Java-based Kafka Streams app for CDR normalization, deduplication, and error handling. 
 
 - **streaming_mediation_spark_streaming/**  
-  Python Spark Streaming pipeline for CDR normalization and enrichment.
+  Python Spark Streaming pipeline for CDR normalization and enrichment. **This is a variant implementation of the mediation logic, providing an alternative to the Kafka Streams approach.**
 
-- **billing-engine/**  
-  Java Spark job for real-time/batch rating of CDRs.
+- **3-daily-rating-engine/**, **4-monthly-rating-engine/**  
+  Java Spark jobs for daily and monthly rating of CDRs.
 
-- **monthly-rating-engine/**  
-  Java Spark job for monthly aggregation and rating.
+- **5-billing-engine/**  
+  Java Spark job for billing and aggregation, producing final billing results.
 
-- **rating-engine/**  
-  Java Spark job for rating and storing CDRs.
-
-- **prepare-environment/**  
-  Scripts for bootstrapping databases, connectors, and Pinot tables.
+- **6-prepare-environment/**  
+  Scripts for bootstrapping databases, connectors, Pinot tables, and initial data.
 
 - **docker/**  
-  Dockerfiles, Avro schemas, connector configs, and the main Docker Compose entry point.
-
-- **compose-files/**  
-  Additional Docker Compose files for various deployment modes.
+  Dockerfiles, connector configs, and the main Docker Compose entry point.
 
 ---
 
@@ -75,22 +92,16 @@ The main entry point for running the project is the Docker Compose file located 
 docker compose -f docker/compose.yml up --build
 ```
 
-Or use a specific mode (see `compose-files/` for options):
-
-```bash
-docker compose -f compose-files/compose.spark.cluster.yaml up --build
-```
-
 #### b. Prepare Databases & Schemas
 
 ```bash
-cd prepare-environment
+cd 6-prepare-environment
 pip install -r requirements.txt
 python main.py
 ```
 
 This will:
-- Create DB tables (Cassandra, Pinot, etc.)
+- Create DB tables (Pinot, MongoDB, PostgreSQL, etc.)
 - Register Kafka topics and Avro schemas
 - Register Kafka Connect connectors
 
@@ -109,17 +120,17 @@ Configure generation parameters in `1-synthetic_cdr_generator/config/config.yaml
 ## ⚙️ Configuration
 
 - **Kafka, Schema Registry, Connect:**  
-  See `docker/` and `compose-files/` for service configs.
+  See `docker/` for service configs.
 
 - **Avro Schemas:**  
-  Located in `docker/avro/` and `1-synthetic_cdr_generator/avro/`.
+  Located in `1-synthetic_cdr_generator/avro/` and `6-prepare-environment/avro/`.
 
 - **Application Properties:**  
   Java modules: `src/main/resources/application.properties`  
   Python modules: `config/config.yaml`
 
 - **Connector Configs:**  
-  See `docker/connectors config/` and `prepare-environment/`.
+  See `docker/connectors config/` and `6-prepare-environment/`.
 
 ---
 

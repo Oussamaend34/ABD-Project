@@ -1,6 +1,9 @@
 import requests
-with open("dependencies.txt", "r") as f:
+import os
+with open("spark/spark_dependencies.txt", "r") as f:
     dependencies = f.readlines()
+
+os.makedirs("jars", exist_ok=True)
 
 base_url = "https://repo1.maven.org/maven2/"
 for s in dependencies:

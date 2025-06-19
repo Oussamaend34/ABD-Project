@@ -364,7 +364,9 @@ services:
       prepare-env: {condition: service_completed_successfully}
     
   prepare-env:
-    image: prepare-env
+    build:
+      context: ../6-prepare-environment
+      dockerfile: Dockerfile
     container_name: prepare-env
     network_mode: host
     depends_on:
@@ -379,7 +381,9 @@ services:
       pinot-zookeeper: {condition: service_healthy}
 
   data-generator:
-    image: cdr-generator
+    build:
+      context: ../1-synthetic_cdr_generator
+      dockerfile: Dockerfile
     container_name: data-generator
     network_mode: host
     depends_on:
