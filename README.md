@@ -1,8 +1,8 @@
 # ABD-Project
 
-<p align="center">
+<div align="center" style="background: white; padding: 1em; border-radius: 8px;">
   <img src="./Global Architecture.svg" alt="Global Architecture Diagram" width="800"/>
-</p>
+</div>
 
 A modular, end-to-end telecom data processing platform for generating, ingesting, normalizing, rating, and analyzing synthetic Call/Data Records (CDRs/EDRs) using modern streaming and batch technologies.
 
