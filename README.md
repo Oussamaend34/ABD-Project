@@ -84,36 +84,25 @@ cd ABD-Project
 
 ### 3. Environment Setup
 
-#### a. Start the Full Stack
+1. **Enter the `docker` folder**:
+   ```bash
+   cd docker
+   ```
+2. **Download the JDBC Connector from Confluent Hub**  
+   [JDBC Connector Download & Instructions](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+
+3. **Download the MongoDB Connector from Confluent Hub**  
+   [MongoDB Connector Download & Instructions](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+
+4. **Put the downloaded connectors in the `docker/plugins` folder**
+
+### 4. Start the application
 
 The main entry point for running the project is the Docker Compose file located in the `docker/` folder:
 
 ```bash
 docker compose -f docker/compose.yml up --build
 ```
-
-#### b. Prepare Databases & Schemas
-
-```bash
-cd 6-prepare-environment
-pip install -r requirements.txt
-python main.py
-```
-
-This will:
-- Create DB tables (Pinot, MongoDB, PostgreSQL, etc.)
-- Register Kafka topics and Avro schemas
-- Register Kafka Connect connectors
-
-#### c. Generate Synthetic Data
-
-```bash
-cd 1-synthetic_cdr_generator
-pip install -r requirements.txt
-python main.py
-```
-
-Configure generation parameters in `1-synthetic_cdr_generator/config/config.yaml`.
 
 ---
 
@@ -130,7 +119,7 @@ Configure generation parameters in `1-synthetic_cdr_generator/config/config.yaml
   Python modules: `config/config.yaml`
 
 - **Connector Configs:**  
-  See `docker/connectors config/` and `6-prepare-environment/`.
+  See `6-prepare-environment/`.
 
 ---
 
