@@ -177,28 +177,6 @@ services:
       retries: 5
       start_period: 10s
 
-  dw:
-    image: postgres:latest
-    container_name: dw
-    restart: always
-    environment:
-      POSTGRES_USER: dw
-      POSTGRES_PASSWORD: dw
-      POSTGRES_DB: dw
-    ports:
-      - "5432:5432"
-    volumes:
-      - dw_data:/var/lib/postgresql/data
-      - ./dwinitdb:/docker-entrypoint-initdb.d
-    networks:
-      - kafka-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-
 
   pinot-zookeeper:
     image: zookeeper:3.9.2
@@ -290,7 +268,6 @@ services:
       - DATABASE_URL=postgresql+psycopg2://superset:superset@metadata-db:5432/superset
     depends_on:
       metadata-db: {condition: service_healthy}
-      dw: {condition: service_healthy}
 
     command: >
       /bin/bash -c "
@@ -298,7 +275,6 @@ services:
         superset db upgrade &&
         superset fab create-admin --username admin --firstname Admin --lastname User --email admin@superset.com --password admin &&
         superset init &&
-        superset import-dashboards --path /home/superset_bootstrap/dashboard.zip -u admin &&
         superset import-dashboards --path /home/superset_bootstrap/dashboard1.zip -u admin &&
         superset run -h 0.0.0.0 -p 8088 --with-threads --reload --debug
       "
@@ -330,7 +306,7 @@ services:
     scale: 1
     environment:
       APPLICATION_ID_CONFIG: "streaming-mediation-voice"
-      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092"
       SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
       INPUT_TOPIC: "cdr.voice"
       OK_OUTPUT_TOPIC: "cdr.ok"
@@ -343,7 +319,6 @@ services:
       schema-registry: {condition: service_healthy}
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
-      dw: {condition: service_healthy}
       prepare-env: {condition: service_completed_successfully}
 
 
@@ -354,7 +329,7 @@ services:
     scale: 1
     environment:
       APPLICATION_ID_CONFIG: "streaming-mediation-data"
-      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092"
       SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
       INPUT_TOPIC: "cdr.data"
       OK_OUTPUT_TOPIC: "cdr.ok"
@@ -366,7 +341,6 @@ services:
       schema-registry: {condition: service_healthy}
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
-      dw: {condition: service_healthy}
       prepare-env: {condition: service_completed_successfully}
 
   streaming-mediation-sms:
@@ -375,7 +349,7 @@ services:
     scale: 1
     environment:
       APPLICATION_ID_CONFIG: "streaming-mediation-sms"
-      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092,localhost:9093,localhost:9094"
+      BOOTSTRAP_SERVERS_CONFIG: "localhost:9092"
       SCHEMA_REGISTRY_URL_CONFIG: "http://localhost:8081"
       INPUT_TOPIC: "cdr.sms"
       OK_OUTPUT_TOPIC: "cdr.ok"
@@ -387,7 +361,6 @@ services:
       schema-registry: {condition: service_healthy}
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
-      dw: {condition: service_healthy}
       prepare-env: {condition: service_completed_successfully}
     
   prepare-env:
@@ -400,7 +373,10 @@ services:
       schema-registry: {condition: service_healthy}
       mongodb: {condition: service_healthy}
       postgres: {condition: service_healthy}
-      dw: {condition: service_healthy}
+      pinot-broker: {condition: service_healthy}
+      pinot-controller: {condition: service_healthy}
+      pinot-server: {condition: service_healthy}
+      pinot-zookeeper: {condition: service_healthy}
 
   data-generator:
     image: cdr-generator
@@ -414,7 +390,6 @@ volumes:
   postgres-data:
   mongodb_data:
   superset_db_data:
-  dw_data:
 
 
 networks:

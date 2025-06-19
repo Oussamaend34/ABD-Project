@@ -20,25 +20,10 @@ def main():
     except Exception as e:
         print(f"❌ An error occurred while registering the connector: {e}")
     try:
-        print("Registering the cdr ok jdbc sink connector...")
-        register_connector(connector_config_json_path="cdr-ok-sink-connector.json")
-    except Exception as e:
-        print(f"❌ An error occurred while registering the connector: {e}")
-    try:
-        print("Registering the cdr error jdbc sink connector...")
-        register_connector(connector_config_json_path="cdr-error-sink-connector.json")
-    except Exception as e:
-        print(f"❌ An error occurred while registering the connector: {e}")
-    try:
         print("Registering the database jdbc source connector...")
         register_connector(
             connector_config_json_path="jdbc-source-connector-config.json"
         )
-    except Exception as e:
-        print(f"❌ An error occurred while registering the connector: {e}")
-    try:
-        print("Registering the database jdbc sink connector...")
-        register_connector(connector_config_json_path="jdbc-sink-connector-config.json")
     except Exception as e:
         print(f"❌ An error occurred while registering the connector: {e}")
     try:
