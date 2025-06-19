@@ -149,9 +149,6 @@ Configure generation parameters in `1-synthetic_cdr_generator/config/config.yaml
 - **Python Modules:**  
   Use virtualenv or conda, install requirements, and run scripts as needed.
 
-- **Testing:**  
-  (Add your test instructions here if available.)
-
 ---
 
 ## 📊 Visualization
@@ -168,14 +165,8 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ---
 
-## 📄 License
-
-[MIT](LICENSE) (or your license of choice)
-
----
-
 ## 📬 Contact
 
-For questions or support, open an issue or contact [your-email@example.com].
+For questions or support, open an issue or contact [oussama.elalaouielismali@etu.uae.ac.ma].
 
 --- 
