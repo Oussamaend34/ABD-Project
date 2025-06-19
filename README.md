@@ -8,24 +8,6 @@ A modular, end-to-end telecom data processing platform for generating, ingesting
 
 ---
 
-## ⚡️ Before You Start
-
-To run the application, make sure you:
-
-1. **Enter the `docker` folder**:
-   ```bash
-   cd docker
-   ```
-2. **Download the JDBC Connector from Confluent Hub**  
-   [JDBC Connector Download & Instructions](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
-
-3. **Download the MongoDB Connector from Confluent Hub**  
-   [MongoDB Connector Download & Instructions](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
-
-4. **Put the downloaded connectors in the `docker/plugins` folder**
-
----
-
 ## 🏗️ Architecture Overview
 
 This project simulates a real-world telecom data pipeline, including:
@@ -64,6 +46,24 @@ See the architecture diagram above or `Gloabl Architecture.pdf` for more details
 
 - **docker/**  
   Dockerfiles, connector configs, and the main Docker Compose entry point.
+
+---
+
+## ⚡️ Before You Start
+
+To run the application, make sure you:
+
+1. **Enter the `docker` folder**:
+   ```bash
+   cd docker
+   ```
+2. **Download the JDBC Connector from Confluent Hub**  
+   [JDBC Connector Download & Instructions](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+
+3. **Download the MongoDB Connector from Confluent Hub**  
+   [MongoDB Connector Download & Instructions](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+
+4. **Put the downloaded connectors in the `docker/plugins` folder**
 
 ---
 
@@ -123,7 +123,7 @@ Configure generation parameters in `1-synthetic_cdr_generator/config/config.yaml
   See `docker/` for service configs.
 
 - **Avro Schemas:**  
-  Located in `1-synthetic_cdr_generator/avro/` and `6-prepare-environment/avro/`.
+  Located in `6-prepare-environment/avro/`.
 
 - **Application Properties:**  
   Java modules: `src/main/resources/application.properties`  
